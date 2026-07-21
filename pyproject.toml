@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "responsevec"
+version = "0.1.0"
+description = "ResponseVec: response-centric representations for individual-level silicon sampling"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.24,<3",
+  "pandas>=2.0,<3",
+  "pyarrow>=14,<22",
+  "scipy>=1.10,<2",
+  "scikit-learn>=1.3,<2",
+  "PyYAML>=6,<7",
+  "tqdm>=4.66,<5",
+]
+
+[project.optional-dependencies]
+# Local model access is mandatory for ResponseVec: the LLM2Vec / LLM2Vec-Gen
+# hidden-state path cannot be served by a chat API (design 11.1). Installed at
+# Colab GPU-run time; tests gate on importorskip so CPU-only dev still runs.
+llm = [
+  "torch>=2.6,<3",
+  "transformers==4.56.2",
+  "accelerate>=1.0",
+  "peft==0.18.0",
+  "sentence-transformers>=3.0",
+  "bitsandbytes>=0.43; platform_system=='Linux'",
+]
+# The notebook installs llm2vec-gen==0.1.3 with --no-deps after this runtime.
+# Its published metadata pulls training-only packages, FlashAttention, and an
+# exact Torch build; inference only needs the curated stack above.  Qwen3
+# input-centric encoding uses the checkpoint's official remote encoder code,
+# because llm2vec 0.2.3 itself predates that architecture.
+llm2vec = []
+api = [
+  "anthropic>=0.40,<1",
+  "openai>=1.50,<2",
+]
+dev = ["pytest>=8,<9"]
+analysis = [
+  "matplotlib>=3.8,<4",
+  "seaborn>=0.13,<1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

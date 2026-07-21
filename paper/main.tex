@@ -1,0 +1,49 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+\setcounter{secnumdepth}{2}
+
+\title{ResponseVec: Turning Large Language Models from Answer Generators into Latent Respondent Encoders for Individual-Level Silicon Sampling}
+\author{
+    Anonymous Submission
+}
+\affiliations{
+    AAAI 2027 Anonymous Submission
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Individual-level silicon sampling---using large language models (LLMs) to predict how a specific survey respondent will answer a specific question---has become a central tool for augmenting increasingly expensive survey research, yet prevailing approaches consume the LLM's answer token directly and inherit its miscalibration, prompt sensitivity, and poor transfer to unseen items. We argue that this failure is structural: forcing an LLM to commit to a discrete answer discards the rich latent structure of how a respondent would react. Drawing an explicit analogy to recent work that repurposes LLMs from spatio-temporal \emph{predictors} into geolocation \emph{representation generators}, we propose to treat the LLM as a latent respondent encoder. Our method fuses a demographic profile, target-relevant answer history, and the current item with its options into a literature-grounded survey prompt, extracts a latent reaction vector (\textbf{ResponseVec}) with a generative LLM embedder that preserves output semantics rather than a discriminative encoder that discards them, and predicts the true choice with a lightweight, calibratable option-aware decoder. We further contrast query-conditioned ResponseVec against a reusable RespondentVec that is computed once per person and shared across all items, and characterize the boundary among task adaptivity, representation reusability, and compute. Across three transfer regimes---unseen questions, cross-domain items, and out-of-distribution demographic intersections---we test whether latent representations are more accurate, better calibrated, more robust, and more transferable than direct generation, classical psychometric models, generic text vectors, raw hidden states, a non-generative encoder ablation, and quantized fine-tuning baselines. Our analysis yields an actionable Pareto frontier for when the query conditioning of ResponseVec is necessary and when the reusability of RespondentVec already suffices.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related-work}
+\input{sections/problem}
+\input{sections/method}
+\input{sections/tradeoff}
+\input{sections/experimental-setup}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliography{refs}
+
+\end{document}

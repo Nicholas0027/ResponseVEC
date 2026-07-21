@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scientific_results": false,
+  "prediction_rows": 858,
+  "methods": [
+    "direct_calibrated",
+    "direct_raw",
+    "direct_scalar",
+    "direct_selected",
+    "input_centric",
+    "raw_final",
+    "raw_mean",
+    "raw_selected",
+    "respondent_vec",
+    "response_centric",
+    "sentence"
+  ],
+  "primary_code_path_exercised": true,
+  "config": "/data/lab/responsevec/artifacts/smoke/smoke_config.yaml"
+}

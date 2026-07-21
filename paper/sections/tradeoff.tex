@@ -1,0 +1,38 @@
+\section{The ResponseVec--RespondentVec Trade-off}
+\label{sec:tradeoff}
+
+The two representation regimes expose a three-way tension among \emph{task adaptivity} (how well the representation captures the respondent's reaction to the specific target item), \emph{representation reusability} (how many items a single representation can serve), and \emph{compute cost} (the number of LLM forward passes required). We formalize this tension and derive the conditions under which each regime dominates, yielding the Pareto frontier that organizes our experimental analysis.
+
+\subsection{Formal Setup}
+
+Consider a respondent $r$ facing a questionnaire of $Q$ items. Let $\text{Acc}_{\text{RV}}(q)$ and $\text{Acc}_{\text{RD}}(q)$ denote the expected accuracy of ResponseVec and RespondentVec on item $q$, respectively, and let $C_{\text{LLM}}$ denote the cost of one LLM forward pass and $C_{\text{dec}}$ the cost of one decoder forward pass, with $C_{\text{dec}} \ll C_{\text{LLM}}$. The total compute for the questionnaire is
+\begin{equation}
+\label{eq:cost_rv}
+C_{\text{RV}} = Q \cdot C_{\text{LLM}} + Q K \cdot C_{\text{dec}},
+\end{equation}
+\begin{equation}
+\label{eq:cost_rd}
+C_{\text{RD}} = C_{\text{LLM}} + Q K \cdot C_{\text{dec}}.
+\end{equation}
+Since $C_{\text{dec}} \ll C_{\text{LLM}}$, the cost ratio asymptotes to $C_{\text{RV}} / C_{\text{RD}} \to Q$ as $Q$ grows, so the cost penalty of query conditioning scales linearly with questionnaire length. Against this cost, ResponseVec accrues an accuracy advantage that we now decompose.
+
+\subsection{Decomposing the Adaptivity Gap}
+
+Let $\mathbf{v}^\ast_r(q) = g_\theta(D_r, H_r, q, o)$ be the query-conditioned representation and $\mathbf{v}_r = g_\theta(D_r, H_r)$ the reusable one. We decompose the per-item accuracy gap into two terms:
+\begin{equation}
+\label{eq:gap}
+\Delta(q) = \text{Acc}_{\text{RV}}(q) - \text{Acc}_{\text{RD}}(q) = \underbrace{\Delta_{\text{item}}(q)}_{\text{item signal}} - \underbrace{\Delta_{\text{noise}}(q)}_{\text{overfitting}}.
+\end{equation}
+The \emph{item signal} $\Delta_{\text{item}}(q)$ is the accuracy gain from conditioning $\mathbf{v}^\ast_r$ on the specific item text and option set, which we expect to be large when the item is discriminative---i.e., when different respondents with similar histories give different answers---and small when the item is predictable from the respondent's stable disposition alone. The \emph{overfitting} term $\Delta_{\text{noise}}(q)$ captures the risk that the query-conditioned encoder, by attending to the target item, becomes sensitive to item-irrelevant features of the prompt (e.g., option ordering artifacts, stem phrasing idiosyncrasies), which harms transfer. The net gap $\Delta(q)$ is thus item-dependent, and the central empirical question is how $\Delta(q)$ distributes across items, domains, and demographic intersections.
+
+\subsection{Predictions}
+
+The decomposition yields three testable predictions that our experiments are designed to verify. \textbf{(P1) Within-instrument, high-discriminability items favor ResponseVec.} When items are answered heterogeneously by respondents with similar histories, the item signal $\Delta_{\text{item}}$ dominates, and $\Delta(q) > 0$. \textbf{(P2) Cross-domain and cross-demographic transfer favor RespondentVec.} When the target domain or the target demographic intersection differs from the training distribution, the query-conditioned encoder's sensitivity to item-irrelevant features becomes a liability, so $\Delta_{\text{noise}}$ grows and the cheaper RespondentVec becomes competitive or superior. \textbf{(P3) The Pareto frontier is item-heterogeneous.} A mixed strategy that uses RespondentVec for low-discriminability items and ResponseVec for high-discriminability items should dominate either uniform strategy on the accuracy--cost plane, and the optimal mixing threshold is itself a function of the transfer regime.
+
+\subsection{Operationalizing the Frontier}
+
+For a target instrument with $Q$ items and a compute budget $B$ (in LLM-equivalent forward passes), the practitioner chooses a subset $\mathcal{S} \subseteq \{1,\dots,Q\}$ of items to score with ResponseVec, scoring the rest with RespondentVec, subject to $|\mathcal{S}| \cdot C_{\text{LLM}} \le B$. The expected accuracy is $\frac{1}{Q}\sum_q \big[\mathbb{I}(q \in \mathcal{S}) \text{Acc}_{\text{RV}}(q) + \mathbb{I}(q \notin \mathcal{S}) \text{Acc}_{\text{RD}}(q)\big]$, which is maximized by allocating ResponseVec to the items with the largest positive $\Delta(q)$. Estimating $\Delta(q)$ on a small held-out calibration set thus yields a data-driven allocation policy. We report the resulting Pareto frontiers in Section~\ref{sec:results} and show that the frontier shifts systematically with the transfer regime, confirming the three predictions above and providing the operational guidance that constitutes our analytical contribution.
+
+\subsection{Relation to Prior Cost--Accuracy Analyses}
+
+Prior work on silicon sampling has largely reported accuracy in a single regime without accounting for compute~\citep{sun2024random,hu2024quantifying,li2026personabased}, or has studied transfer without the cost dimension~\citep{ku2026silicon}. The closest analogue outside the survey domain is the cost--accuracy analysis of parameter-efficient fine-tuning~\citep{mao2024survey,liu2025shared}, which trades adapter capacity against task performance; our setting differs in that the trade-off is between two representation regimes of the same frozen encoder rather than between fine-tuning budgets, and in that the cost is dominated by LLM inference rather than by training. This reframing is what makes the ResponseVec/RespondentVec boundary actionable for survey practitioners, who typically face strict per-respondent compute budgets when imputing large panels.
