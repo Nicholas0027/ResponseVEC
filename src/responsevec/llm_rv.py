@@ -222,6 +222,75 @@ class CausalExtractor:
             "mean": np.asarray(mean_out, dtype=np.float32),
         }
 
+    def extract_generated_mean(
+        self,
+        prompts: Sequence[str],
+        max_new_tokens: int = 32,
+    ) -> np.ndarray:
+        """Generate a greedy continuation and mean-pool the hidden states of the
+        GENERATED tokens (not the prompt tokens).
+
+        Wang, Isola & Cheung (ICML 2026, "The Truth Lies Somewhere in the Middle
+        (of the Generated Tokens)") find that mean-pooling across generated-token
+        hidden states yields more semantic representations than any individual
+        token or than prompt-token pooling, because generation makes the input's
+        semantic content more accessible in hidden-state space.  This method
+        implements that insight as a new representation family: the SAME causal
+        backbone that produces causal_final / raw_mean is asked to *generate* a
+        short continuation, and we average the last-layer hidden states of the
+        generated portion only.  No additional model loading; the encoder stays
+        frozen and the extraction cost is one generate() call per batch.
+
+        Returns (n, hidden) float32 — the mean-pooled generated-token vector.
+        """
+        import torch
+
+        if not prompts:
+            return np.zeros((0, 0), np.float32)
+        mean_out: list[np.ndarray] = []
+        for start in range(0, len(prompts), self.batch_size):
+            chunk = list(prompts[start : start + self.batch_size])
+            if self.use_chat_template:
+                chunk = [
+                    self.tokenizer.apply_chat_template(
+                        [{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True
+                    )
+                    for p in chunk
+                ]
+            tokens = self.tokenizer(
+                chunk, padding=True, truncation=True, max_length=self.max_length,
+                return_tensors="pt", add_special_tokens=not self.use_chat_template,
+            ).to(self.device)
+            prompt_len = tokens["input_ids"].shape[1]
+            with torch.no_grad():
+                gen_output = self.model.generate(
+                    input_ids=tokens["input_ids"],
+                    attention_mask=tokens["attention_mask"],
+                    max_new_tokens=int(max_new_tokens),
+                    do_sample=False,
+                    pad_token_id=self.tokenizer.pad_token_id,
+                    output_hidden_states=True,
+                    return_dict_in_generate=True,
+                )
+                # gen_output.hidden_states: tuple of (1 + n_gen_steps).
+                # [0] = prompt forward; [1:] = one entry per generated token.
+                # Each entry is a tuple of (n_layers+1) tensors; [-1] is the
+                # last layer.  Generation-step tensors are (b, 1, hidden).
+                gen_hidden_list = []
+                for step in range(1, len(gen_output.hidden_states)):
+                    h = gen_output.hidden_states[step][-1][:, 0, :]  # (b, hidden)
+                    gen_hidden_list.append(h)
+                stacked = torch.stack(gen_hidden_list, dim=1)  # (b, n_gen, hidden)
+                # Mask out padding tokens generated after EOS so they don't
+                # dilute the mean (left-padded batches share prompt_len).
+                gen_ids = gen_output.sequences[:, prompt_len:]  # (b, n_gen)
+                mask = (gen_ids != self.tokenizer.pad_token_id).float().unsqueeze(-1)  # (b, n_gen, 1)
+                summed = (stacked.float() * mask).sum(dim=1)
+                counts = mask.sum(dim=1).clamp(min=1.0)
+                mean_vec = (summed / counts).cpu().numpy().astype(np.float32)
+            mean_out.append(mean_vec)
+        return np.concatenate(mean_out, axis=0) if mean_out else np.zeros((0, 0), np.float32)
+
 
 class LLM2VecEncoder:
     """Uniform wrapper over an LLM2Vec / LLM2Vec-Gen encoder. `encode_fn` is the

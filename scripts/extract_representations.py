@@ -77,7 +77,7 @@ def build_units(protocol: str, store, folds, split: str, held_out_domain: str | 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/responsevec.yaml")
-    parser.add_argument("--family", choices=["causal", "input_centric", "response_centric", "sentence"], required=True)
+    parser.add_argument("--family", choices=["causal", "input_centric", "response_centric", "sentence", "generated_mean"], required=True)
     parser.add_argument("--protocol", choices=["A", "B", "C", "D"], default="B",
                         help="A=seen-item, B=unseen-item (R1, default), C=cross-domain (R2), D=OOD-intersection (R3)")
     parser.add_argument("--held-out-domain", default=None, help="required for Protocol C")
@@ -213,6 +213,41 @@ def main() -> None:
                     )
                     done[family].update(chunk_rows.loc[keep, "row_id"].astype(str))
         summary = {family: cache.validate() for family, cache in caches.items()}
+    elif args.family == "generated_mean":
+        # Wang, Isola & Cheung (ICML 2026): mean-pool over GENERATED token
+        # hidden states yields more semantic representations than prompt-token
+        # pooling. Reuses the SAME causal backbone (no new model load) but
+        # generates a greedy continuation and pools the generated portion only.
+        checkpoint = rep["backbone"]
+        if args.synthetic_encoder:
+            extractor = None
+        else:
+            model, tokenizer = load_causal_backbone(
+                rep["backbone"], rep["dtype"], rep.get("quantization"),
+                revision=revisions.get("backbone"),
+            )
+            extractor = CausalExtractor(
+                model, tokenizer, choose_device(), max_length=int(rep["max_length"]),
+                batch_size=int(rep["batch_size"]),
+            )
+        directory = _cache_dir(args.family)
+        cache = RepresentationCache.create(
+            directory, family=args.family, checkpoint=checkpoint, item_split=item_split,
+            k=args.k, option_seed=args.option_seed, has_logits=False, settings=settings,
+            overwrite=args.overwrite,
+        )
+        done = cache.already_done_row_ids()
+        needed = [index for index, row_id in enumerate(rows["row_id"].astype(str)) if row_id not in done]
+        gen_max_new = int(rep.get("generated_mean_max_new_tokens", 32))
+        for start in range(0, len(needed), args.shard_size):
+            indices = needed[start : start + args.shard_size]
+            chunk_prompts = [prompts[index] for index in indices]
+            if extractor is None:
+                vectors = fake_vectors(chunk_prompts, 48, args.family)
+            else:
+                vectors = extractor.extract_generated_mean(chunk_prompts, max_new_tokens=gen_max_new)
+            cache.append(rows.iloc[indices].reset_index(drop=True), vectors)
+        summary = {args.family: cache.validate()}
     else:
         if args.family == "input_centric":
             checkpoint = rep["input_centric"]
