@@ -20,3 +20,8 @@ github_token*
 UNKNOWN.egg-info/
 build/
 dist/
+
+# Large external data + run logs (regenerated)
+external/
+logs/
+*.bak

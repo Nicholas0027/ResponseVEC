@@ -17,6 +17,7 @@ from typing import Any, Mapping
 import numpy as np
 import pandas as pd
 
+from .align import AlignConfig, ResponseVecAligner
 from .decoder import DecoderConfig, ObjectiveWeights, OptionAwareDecoder, total_loss
 from .direct import DirectLogitCalibrator
 from .encode import stack_option_matrix
@@ -467,5 +468,165 @@ def save_head_fit(fit: HeadFit, directory: str | Path, metadata: Mapping[str, An
         **dict(metadata),
         "best_epoch": fit.best_epoch,
         "best_validation_nll": fit.best_validation_nll,
+        "history": fit.history,
+    })
+
+
+# --------------------------------------------------------------------------- #
+# ResponseVec-Align (design §2.5): task-aligned projection of a frozen z.       #
+# Trained BEFORE the option-aware decoder, with the encoder frozen, so the      #
+# expensive extraction cache is reused verbatim and only a few hundred-K        #
+# projection parameters receive gradients.                                      #
+# --------------------------------------------------------------------------- #
+
+
+@dataclass
+class AlignerFit:
+    aligner: Any
+    best_epoch: int
+    best_validation_loss: float
+    history: list[dict[str, float]]
+
+
+def _aligner_batch(arrays: HeadArrays, indices: np.ndarray, device):
+    import torch
+
+    return {
+        "z": torch.as_tensor(arrays.z[indices], dtype=torch.float32, device=device),
+        "option_matrix": torch.as_tensor(arrays.option_matrix[indices], dtype=torch.float32, device=device),
+        "option_mask": torch.as_tensor(arrays.option_mask[indices], dtype=torch.float32, device=device),
+        "target": torch.as_tensor(arrays.targets[indices], dtype=torch.long, device=device),
+    }
+
+
+def _aligner_validation_loss(aligner, arrays: HeadArrays, batch_size: int, device) -> float:
+    import torch
+
+    aligner.eval()
+    losses, sizes = [], []
+    with torch.no_grad():
+        for start in range(0, len(arrays), batch_size):
+            indices = np.arange(start, min(start + batch_size, len(arrays)))
+            batch = _aligner_batch(arrays, indices, device)
+            loss = aligner(batch["z"], batch["option_matrix"], batch["option_mask"], batch["target"])
+            losses.append(float(loss.detach().cpu()) * len(indices))
+            sizes.append(len(indices))
+    return float(np.sum(losses) / max(np.sum(sizes), 1))
+
+
+def train_aligner(
+    train: HeadArrays,
+    validation: HeadArrays,
+    *,
+    projection_dim: int = 256,
+    hidden_dim: int = 512,
+    dropout: float = 0.10,
+    temperature_init: float = 0.07,
+    residual_alpha_init: float = 0.0,
+    cross_respondent_negatives: bool = True,
+    lr: float = 1e-3,
+    weight_decay: float = 1e-5,
+    epochs: int = 60,
+    patience: int = 8,
+    batch_size: int = 256,
+    gradient_clip: float = 1.0,
+    seed: int = 1701,
+    device: str | None = None,
+) -> AlignerFit:
+    """Fit the option-anchored supervised-contrastive projection g_phi on a
+    frozen representation cache. Validation loss is the same contrastive loss
+    on the held-out validation rows (never the target test split)."""
+    import torch
+
+    if not len(train) or not len(validation):
+        raise ValueError("aligner training requires non-empty train and validation arrays")
+    seed_everything(seed)
+    device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+    config = AlignConfig(
+        z_dim=int(train.z.shape[1]), o_dim=int(train.option_matrix.shape[2]),
+        projection_dim=int(projection_dim), hidden_dim=int(hidden_dim),
+        dropout=float(dropout), temperature_init=float(temperature_init),
+        residual_alpha_init=float(residual_alpha_init),
+        cross_respondent_negatives=bool(cross_respondent_negatives),
+        max_options=int(train.option_mask.shape[1]),
+    )
+    aligner = ResponseVecAligner(config).to(device)
+    optimizer = torch.optim.AdamW(aligner.parameters(), lr=float(lr), weight_decay=float(weight_decay))
+    rng = np.random.default_rng(seed)
+    best_state, best_loss, best_epoch, bad_epochs = None, float("inf"), -1, 0
+    history: list[dict[str, float]] = []
+    for epoch in range(int(epochs)):
+        aligner.train()
+        order = rng.permutation(len(train))
+        epoch_losses = []
+        for start in range(0, len(order), int(batch_size)):
+            indices = order[start : start + int(batch_size)]
+            if len(indices) < 2:  # contrastive loss needs >=2 rows for negatives
+                continue
+            batch = _aligner_batch(train, indices, device)
+            optimizer.zero_grad(set_to_none=True)
+            loss = aligner(batch["z"], batch["option_matrix"], batch["option_mask"], batch["target"])
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(aligner.parameters(), float(gradient_clip))
+            optimizer.step()
+            epoch_losses.append(float(loss.detach().cpu()))
+        validation_loss = _aligner_validation_loss(aligner, validation, int(batch_size), device)
+        history.append({
+            "epoch": float(epoch), "train_loss": float(np.mean(epoch_losses) if epoch_losses else np.nan),
+            "validation_loss": validation_loss,
+            "residual_alpha": float(aligner.residual_alpha.detach().cpu()),
+        })
+        if validation_loss < best_loss - 1e-6:
+            best_loss, best_epoch = validation_loss, epoch
+            best_state = copy.deepcopy(aligner.state_dict())
+            bad_epochs = 0
+        else:
+            bad_epochs += 1
+            if bad_epochs >= int(patience):
+                break
+    if best_state is None:
+        raise RuntimeError("aligner training produced no checkpoint")
+    aligner.load_state_dict(best_state)
+    aligner.eval()
+    return AlignerFit(aligner, int(best_epoch), float(best_loss), history)
+
+
+def apply_aligner(aligner, arrays: HeadArrays, *, batch_size: int = 512, device: str | None = None) -> HeadArrays:
+    """Return a copy of `arrays` whose z is replaced by g_phi(z), leaving every
+    option/target field untouched. The downstream option-aware decoder then
+    trains on the task-aligned representation exactly as on any frozen family."""
+    import torch
+
+    device = torch.device(device or next(aligner.parameters()).device)
+    aligner = aligner.to(device).eval()
+    projected = []
+    with torch.no_grad():
+        for start in range(0, len(arrays), int(batch_size)):
+            indices = np.arange(start, min(start + int(batch_size), len(arrays)))
+            z = torch.as_tensor(arrays.z[indices], dtype=torch.float32, device=device)
+            projected.append(aligner.project(z).cpu().numpy().astype(np.float32))
+    new_z = np.concatenate(projected, axis=0) if projected else arrays.z
+    return HeadArrays(
+        rows=arrays.rows,
+        z=new_z,
+        option_matrix=arrays.option_matrix,
+        option_mask=arrays.option_mask,
+        log_prior=arrays.log_prior,
+        targets=arrays.targets,
+        ordinal_mask=arrays.ordinal_mask,
+        direct_probabilities=arrays.direct_probabilities,
+    )
+
+
+def save_aligner_fit(fit: AlignerFit, directory: str | Path, metadata: Mapping[str, Any]) -> None:
+    import torch
+
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    torch.save(fit.aligner.state_dict(), directory / "aligner.pt")
+    write_json(directory / "aligner_fit.json", {
+        **dict(metadata),
+        "best_epoch": fit.best_epoch,
+        "best_validation_loss": fit.best_validation_loss,
         "history": fit.history,
     })

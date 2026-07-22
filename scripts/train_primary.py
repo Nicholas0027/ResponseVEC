@@ -35,13 +35,16 @@ from responsevec.pipeline import (
 from responsevec.prior import PopulationPrior
 from responsevec.protocols import ItemFolds
 from responsevec.training import (
+    apply_aligner,
     arrays_from_cache,
     arrays_from_respondent_cache,
     average_decoder_seeds,
     average_option_seeds,
     predict_head,
     prediction_frame,
+    save_aligner_fit,
     save_head_fit,
+    train_aligner,
     train_direct_head,
     train_option_head,
     subset_arrays,
@@ -124,6 +127,16 @@ def main() -> None:
         "--force-retrain", action="store_true",
         help="retrain every method from scratch even if predictions_all_replicates.parquet "
              "already has complete results for it (disables the default resume-by-method behavior)",
+    )
+    parser.add_argument(
+        "--align-families", default="",
+        help="comma-separated representation families to ALSO train a task-aligned "
+             "variant for (ResponseVec-Align, design section 2.5). For each name X in this "
+             "list an extra method 'X_aligned' is produced: a frozen-encoder "
+             "option-anchored supervised-contrastive projection g_phi is fit on X's "
+             "train/val cache, then the SAME option-aware decoder is trained on g_phi(z). "
+             "Applying it to raw_mean/sentence too keeps the capacity-matched fairness "
+             "argument (e.g. --align-families response_centric,raw_mean,sentence).",
     )
     args = parser.parse_args()
     config = load_and_prepare(args.config)
@@ -248,6 +261,71 @@ def main() -> None:
                 test = load_arrays(config, args.fold, "test", "test", args.k, option_seed, cache_family, option_table, prior, train_keys, role_keys)
                 probability = predict_head(fit.model, test, device=args.device)
                 all_predictions.append(prediction_frame(test, probability, f"{method}_seed{seed}"))
+
+    # ------------------------------------------------------------------ #
+    # ResponseVec-Align (design section 2.5): task-aligned projection.     #
+    # For each requested family X, fit a frozen-encoder contrastive        #
+    # projection g_phi on X's train/val cache, project train/val/test z,   #
+    # then train the SAME option-aware decoder on g_phi(z) -> 'X_aligned'. #
+    # ------------------------------------------------------------------ #
+    align_families = [name.strip() for name in args.align_families.split(",") if name.strip()]
+    align_config = config.get("align", {}) if isinstance(config, dict) else {}
+    for family in align_families:
+        method = f"{family}_aligned"
+        cache_family = representation_families.get(family, family)
+        if method_is_complete(existing, [f"{method}_seed{s}" for s in decoder_seeds], option_seeds):
+            print(f"[skip] {method} already complete for this fold/k -- reusing cached predictions")
+            representation_validation[method] = [
+                load_saved_validation_nll(heads_dir, args.fold, args.k, method, seed) for seed in decoder_seeds
+            ]
+            all_predictions.append(existing[existing["method"].str.startswith(f"{method}_seed")])
+            continue
+        base_train = load_arrays(config, args.fold, "train", "train", args.k, 0, cache_family, option_table, prior, train_keys, role_keys)
+        base_validation = load_arrays(config, args.fold, "validation", "validation", args.k, 0, cache_family, option_table, prior, train_keys, role_keys)
+        representation_validation[method] = []
+        for seed in decoder_seeds:
+            # 1) Fit the task-alignment projection on frozen z (encoder untouched).
+            aligner_fit = train_aligner(
+                base_train, base_validation,
+                projection_dim=int(align_config.get("projection_dim", config["decoder"]["projection_dim"])),
+                hidden_dim=int(align_config.get("hidden_dim", 512)),
+                dropout=float(align_config.get("dropout", config["decoder"]["dropout"])),
+                temperature_init=float(align_config.get("temperature_init", 0.07)),
+                residual_alpha_init=float(align_config.get("residual_alpha_init", 0.0)),
+                cross_respondent_negatives=bool(align_config.get("cross_respondent_negatives", True)),
+                lr=float(align_config.get("lr", 1e-3)),
+                weight_decay=float(align_config.get("weight_decay", 1e-5)),
+                epochs=int(args.epochs or align_config.get("epochs", 60)),
+                patience=int(align_config.get("early_stopping_patience", 8)),
+                batch_size=int(align_config.get("batch_size", config["decoder"]["batch_size"])),
+                seed=seed, device=args.device,
+            )
+            save_aligner_fit(
+                aligner_fit,
+                heads_dir / f"fold_{args.fold:02d}" / f"k_{args.k}" / f"{method}_seed{seed}",
+                {"family": method, "base_family": family, "seed": seed, "fold": args.fold, "k": args.k},
+            )
+            # 2) Project train/val z, then train the standard option-aware decoder.
+            aligned_train = apply_aligner(aligner_fit.aligner, base_train, device=args.device)
+            aligned_validation = apply_aligner(aligner_fit.aligner, base_validation, device=args.device)
+            fit = train_option_head(
+                aligned_train, aligned_validation, temperature_init=float(primary["temperature_init"]),
+                rps_lambda=float(primary["rps_lambda"]), seed=seed, **common,
+            )
+            representation_validation[method].append(fit.best_validation_nll)
+            save_head_fit(
+                fit,
+                heads_dir / f"fold_{args.fold:02d}" / f"k_{args.k}" / f"{method}_seed{seed}",
+                {"family": method, "base_family": family, "seed": seed, "fold": args.fold, "k": args.k},
+            )
+            # 3) Evaluate: project each option-permuted test cache with the SAME
+            #    aligner, then decode. Identical option-seed averaging as every
+            #    query-conditioned family.
+            for option_seed in option_seeds:
+                base_test = load_arrays(config, args.fold, "test", "test", args.k, option_seed, cache_family, option_table, prior, train_keys, role_keys)
+                aligned_test = apply_aligner(aligner_fit.aligner, base_test, device=args.device)
+                probability = predict_head(fit.model, aligned_test, device=args.device)
+                all_predictions.append(prediction_frame(aligned_test, probability, f"{method}_seed{seed}"))
 
     if args.include_respondent_vec:
         # RespondentVec (query-independent, design §2.3.D): reuse input_centric's

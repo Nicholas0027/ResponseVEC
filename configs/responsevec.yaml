@@ -108,6 +108,25 @@ decoder:
     temperature_init: [0.05, 0.1, 0.2]
   group_calibration_lambda: 0.0              # secondary; enabled only AFTER the representation-only comparison
 
+# ResponseVec-Align (design section 2.5): task-aligned projection of a FROZEN z.
+# Values below are the fold-0 validation-selected optimum from the align sweep
+# (option-anchored supervised-contrastive projection; encoder never touched, so
+# the extraction cache is reused verbatim). cross_respondent_negatives=True was
+# decisive: it forces person-level discriminability, not just item semantics.
+align:
+  projection_dim: 256
+  hidden_dim: 512
+  dropout: 0.10
+  temperature_init: 0.3
+  residual_alpha_init: 0.0                   # untrained head reduces to a linear projection (honesty)
+  cross_respondent_negatives: true
+  lr: 1.0e-3
+  weight_decay: 1.0e-3
+  epochs: 80
+  early_stopping_patience: 12
+  batch_size: 256
+  families: [response_centric, raw_mean, sentence, input_centric]  # aligned variants trained for these (fairness/capacity control)
+
 finetune:
   # QLoRA upper-bound control (design §6.4 baseline 20): rank-16 adapter on the
   # same train targets with randomized option labels.

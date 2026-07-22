@@ -48,7 +48,7 @@ p = pathlib.Path(cfg["paths"]["metrics"]) / "signal_audit.json"
 if not p.exists():
     print("G0 report missing"); sys.exit(1)
 g0 = json.loads(p.read_text())
-ok = bool(g0.get("seen_budget_pass", False))
+ok = bool(g0.get("seen_gate_pass", False))
 print("G0:", g0)
 sys.exit(0 if ok else 1)
 PY
@@ -62,15 +62,39 @@ PY
   log "Step 3/7: encode options (once)"
   python3 scripts/encode_options.py --config "$CONFIG" --overwrite
 
-  # Representation families x splits for R1 (Protocol B), plus A (train) for R2/R3.
-  for split in train validation test; do
-    for family in causal input_centric response_centric sentence; do
-      log "Step 4/7: extract R1 family=$family split=$split k=$K"
-      python3 scripts/extract_representations.py --config "$CONFIG" \
+  # HF 429 mitigation: every model weight is already cached locally. Standard
+  # LLM2Vec adapters (causal/input_centric/sentence) load cleanly with
+  # HF_HUB_OFFLINE=1 (zero network HEAD calls). Only the LLM2Vec-Gen wrapper
+  # (response_centric) needs online-cached loading; we give it retries and it
+  # is now the ONLY family issuing any HTTP request, so 429 pressure is minimal.
+  extract_family () {
+    local family=$1 split=$2 oseed=$3
+    log "Step 4/7: extract R1 family=$family split=$split option-seed=$oseed k=$K"
+    if [[ "$family" == "response_centric" ]]; then
+      local ok=0
+      for try in 1 2 3 4 5; do
+        if python3 scripts/extract_representations.py --config "$CONFIG" \
+            --protocol B --family "$family" --split "$split" --k "$K" \
+            --option-seed "$oseed" --selection semantic --shard-size 512; then ok=1; break; fi
+        log "  response_centric attempt $try hit an error (likely 429) -> backoff $((try*30))s"; sleep $((try*30))
+      done
+      [[ $ok -eq 1 ]] || { log "FATAL: response_centric extraction failed after retries"; exit 1; }
+    else
+      HF_HUB_OFFLINE=1 python3 scripts/extract_representations.py --config "$CONFIG" \
         --protocol B --family "$family" --split "$split" --k "$K" \
-        --option-seed 0 --selection semantic --shard-size 512
+        --option-seed "$oseed" --selection semantic --shard-size 512
+    fi
+  }
+  # train/validation heads use option-seed 0 only; the TEST split is extracted
+  # for all three option seeds (0,7,42) for option-permutation averaging.
+  for split in train validation test; do
+    if [[ "$split" == "test" ]]; then OPTS="0 7 42"; else OPTS="0"; fi
+    for oseed in $OPTS; do
+      for family in causal input_centric response_centric sentence; do
+        extract_family "$family" "$split" "$oseed"
+      done
     done
-    python3 scripts/extract_respondentvec.py --config "$CONFIG" \
+    HF_HUB_OFFLINE=1 python3 scripts/extract_respondentvec.py --config "$CONFIG" \
       --split "$split" --k "$K" --shard-size 512
   done
 
@@ -78,19 +102,34 @@ PY
   for fold in 0 1 2 3 4 5; do
     python3 scripts/train_primary.py --config "$CONFIG" \
       --fold "$fold" --k "$K" --option-seeds 0,7,42 --seeds 1701,7,42 \
-      --include-respondent-vec
+      --include-respondent-vec \
+      --align-families response_centric,raw_mean,sentence,input_centric
   done
 
   log "Step 6/7: G1 primary evaluation (the gated claim)"
   python3 scripts/evaluate_primary.py --config "$CONFIG" --k "$K"
 
   log "Step 7/7: R2/R3 transfer + cost + figures"
-  # Protocol A train cache + C/D transfer caches for each family.
+  # Protocol A train cache + D transfer caches for each family. Same 429
+  # mitigation as Step 4: standard adapters load OFFLINE (zero HTTP), only the
+  # LLM2Vec-Gen response_centric family loads online-cached with retries.
+  extract_transfer () {
+    local family=$1 protocol=$2 split=$3
+    if [[ "$family" == "response_centric" ]]; then
+      for try in 1 2 3 4 5; do
+        python3 scripts/extract_representations.py --config "$CONFIG" \
+          --protocol "$protocol" --family "$family" --split "$split" --k "$K" --option-seed 0 && return 0
+        log "  transfer $protocol/$family attempt $try failed -> backoff $((try*30))s"; sleep $((try*30))
+      done
+      log "FATAL: transfer extraction failed for $protocol/$family"; return 1
+    else
+      HF_HUB_OFFLINE=1 python3 scripts/extract_representations.py --config "$CONFIG" \
+        --protocol "$protocol" --family "$family" --split "$split" --k "$K" --option-seed 0
+    fi
+  }
   for family in causal input_centric response_centric sentence; do
-    python3 scripts/extract_representations.py --config "$CONFIG" \
-      --protocol A --family "$family" --split train --k "$K" --option-seed 0
-    python3 scripts/extract_representations.py --config "$CONFIG" \
-      --protocol D --family "$family" --split test --k "$K" --option-seed 0
+    extract_transfer "$family" A train
+    extract_transfer "$family" D test
   done
   python3 scripts/evaluate_transfer.py --config "$CONFIG" --k "$K" || \
     log "transfer eval reported partial results (some caches may be absent)"

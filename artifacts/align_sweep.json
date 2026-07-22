@@ -1,0 +1,16 @@
+{
+  "baselines": {
+    "response_centric": 1.5647769482109133,
+    "sentence": 1.503095136008449,
+    "raw_mean": 1.9130750589447314
+  },
+  "best": {
+    "dec_nll": 1.4576329442375866,
+    "cfg": {
+      "temperature_init": 0.3,
+      "lr": 0.001,
+      "cross_neg": true,
+      "weight_decay": 0.001
+    }
+  }
+}
