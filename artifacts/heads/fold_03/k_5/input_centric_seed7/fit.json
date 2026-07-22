@@ -1,0 +1,90 @@
+{
+  "family": "input_centric",
+  "seed": 7,
+  "fold": 3,
+  "k": 5,
+  "best_epoch": 5,
+  "best_validation_nll": 2.4392556546453656,
+  "history": [
+    {
+      "epoch": 0.0,
+      "train_loss": 16.193564561009406,
+      "validation_nll": 3.418508736074443
+    },
+    {
+      "epoch": 1.0,
+      "train_loss": 4.168233186006546,
+      "validation_nll": 4.012695803645187
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 2.8684103339910507,
+      "validation_nll": 2.636880809092613
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 3.565578982234001,
+      "validation_nll": 5.400998966508238
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 2.5568762719631195,
+      "validation_nll": 2.683081257443188
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 2.6023385345935823,
+      "validation_nll": 2.4392556546453656
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 2.320955741405487,
+      "validation_nll": 3.1240265989226064
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 2.1413066893815995,
+      "validation_nll": 4.415348098951512
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 2.7381902664899824,
+      "validation_nll": 5.489637747784172
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 3.3315872341394424,
+      "validation_nll": 4.964929330245884
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 2.532491934299469,
+      "validation_nll": 2.6609707698902354
+    },
+    {
+      "epoch": 11.0,
+      "train_loss": 2.536499097943306,
+      "validation_nll": 3.929434022481661
+    },
+    {
+      "epoch": 12.0,
+      "train_loss": 2.825788751244545,
+      "validation_nll": 2.962784956965736
+    },
+    {
+      "epoch": 13.0,
+      "train_loss": 2.2828840732574465,
+      "validation_nll": 3.6631196900244865
+    },
+    {
+      "epoch": 14.0,
+      "train_loss": 2.157034993171692,
+      "validation_nll": 2.924310734172045
+    },
+    {
+      "epoch": 15.0,
+      "train_loss": 1.9722067654132842,
+      "validation_nll": 3.5231024458921154
+    }
+  ]
+}

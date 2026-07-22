@@ -1,0 +1,8 @@
+{
+  "selected": "raw_mean",
+  "validation_nll": {
+    "raw_final": 3.7033613483303136,
+    "raw_mean": 2.0248309222346577
+  },
+  "selection_used_test_labels": false
+}

@@ -1,0 +1,5 @@
+method,reference,metric,k,item_pool,difference,ci_low,ci_high,p_two_sided,n_panels,n_items,favors_candidate,holm_reject_null,holm_threshold,practical_effect_met,primary_claim_supported
+response_centric,direct_selected,nll,5,unseen,-0.3289212182613071,-0.4225493703526251,-0.2418818141538749,0.0009995002498750624,359,48,True,True,0.0125,True,True
+response_centric,input_centric,nll,5,unseen,-0.10198969237172378,-0.1742732953106927,-0.03011331518625416,0.0079960019990005,359,48,True,True,0.025,True,True
+response_centric,raw_selected,nll,5,unseen,-0.07483075097606862,-0.15565619992053223,0.008628902942342642,0.08295852073963018,359,48,True,False,0.05,True,False
+response_centric,sentence,nll,5,unseen,0.08608751856887013,0.030545763295676254,0.14425395821495515,0.00399800099950025,359,48,False,True,0.016666666666666666,False,False

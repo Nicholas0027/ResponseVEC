@@ -1,0 +1,76 @@
+method,domain,split,item_pool,metric,auac
+direct_calibrated,Environment,test,unseen,accuracy,0.19597069597069597
+direct_calibrated,Role of Government,test,unseen,accuracy,0.21886446886446886
+direct_calibrated,Social Inequality,test,unseen,accuracy,0.27247191011235955
+direct_calibrated,Work Orientations,test,unseen,accuracy,0.23484848484848486
+direct_calibrated,macro,test,unseen,accuracy,0.23053888994900232
+direct_raw,Environment,test,unseen,accuracy,0.18040293040293043
+direct_raw,Role of Government,test,unseen,accuracy,0.23168498168498167
+direct_raw,Social Inequality,test,unseen,accuracy,0.23501872659176032
+direct_raw,Work Orientations,test,unseen,accuracy,0.18371212121212122
+direct_raw,macro,test,unseen,accuracy,0.20770468997294841
+direct_scalar,Environment,test,unseen,accuracy,0.19505494505494506
+direct_scalar,Role of Government,test,unseen,accuracy,0.2518315018315018
+direct_scalar,Social Inequality,test,unseen,accuracy,0.26217228464419473
+direct_scalar,Work Orientations,test,unseen,accuracy,0.22537878787878787
+direct_scalar,macro,test,unseen,accuracy,0.23360937985235736
+direct_selected,Environment,test,unseen,accuracy,0.18864468864468867
+direct_selected,Role of Government,test,unseen,accuracy,0.2380952380952381
+direct_selected,Social Inequality,test,unseen,accuracy,0.2612359550561798
+direct_selected,Work Orientations,test,unseen,accuracy,0.2140151515151515
+direct_selected,macro,test,unseen,accuracy,0.22549775832781452
+input_centric,Environment,test,unseen,accuracy,0.31227106227106227
+input_centric,Role of Government,test,unseen,accuracy,0.27472527472527475
+input_centric,Social Inequality,test,unseen,accuracy,0.38857677902621723
+input_centric,Work Orientations,test,unseen,accuracy,0.3418560606060606
+input_centric,macro,test,unseen,accuracy,0.3293572941571537
+input_centric_aligned,Environment,test,unseen,accuracy,0.2435897435897436
+input_centric_aligned,Role of Government,test,unseen,accuracy,0.27472527472527475
+input_centric_aligned,Social Inequality,test,unseen,accuracy,0.3670411985018726
+input_centric_aligned,Work Orientations,test,unseen,accuracy,0.30303030303030304
+input_centric_aligned,macro,test,unseen,accuracy,0.29709662996179853
+raw_final,Environment,test,unseen,accuracy,0.2619047619047619
+raw_final,Role of Government,test,unseen,accuracy,0.2967032967032967
+raw_final,Social Inequality,test,unseen,accuracy,0.36423220973782766
+raw_final,Work Orientations,test,unseen,accuracy,0.24431818181818182
+raw_final,macro,test,unseen,accuracy,0.29178961254101704
+raw_mean,Environment,test,unseen,accuracy,0.24725274725274726
+raw_mean,Role of Government,test,unseen,accuracy,0.2600732600732601
+raw_mean,Social Inequality,test,unseen,accuracy,0.351123595505618
+raw_mean,Work Orientations,test,unseen,accuracy,0.30492424242424243
+raw_mean,macro,test,unseen,accuracy,0.29084346131396693
+raw_mean_aligned,Environment,test,unseen,accuracy,0.28113553113553114
+raw_mean_aligned,Role of Government,test,unseen,accuracy,0.28846153846153844
+raw_mean_aligned,Social Inequality,test,unseen,accuracy,0.3923220973782771
+raw_mean_aligned,Work Orientations,test,unseen,accuracy,0.293560606060606
+raw_mean_aligned,macro,test,unseen,accuracy,0.3138699432589882
+raw_selected,Environment,test,unseen,accuracy,0.24725274725274726
+raw_selected,Role of Government,test,unseen,accuracy,0.2600732600732601
+raw_selected,Social Inequality,test,unseen,accuracy,0.351123595505618
+raw_selected,Work Orientations,test,unseen,accuracy,0.30492424242424243
+raw_selected,macro,test,unseen,accuracy,0.29084346131396693
+respondent_vec,Environment,test,unseen,accuracy,0.2518315018315018
+respondent_vec,Role of Government,test,unseen,accuracy,0.2902930402930403
+respondent_vec,Social Inequality,test,unseen,accuracy,0.34831460674157305
+respondent_vec,Work Orientations,test,unseen,accuracy,0.31155303030303033
+respondent_vec,macro,test,unseen,accuracy,0.30049804479228637
+response_centric,Environment,test,unseen,accuracy,0.2802197802197802
+response_centric,Role of Government,test,unseen,accuracy,0.35073260073260076
+response_centric,Social Inequality,test,unseen,accuracy,0.3726591760299625
+response_centric,Work Orientations,test,unseen,accuracy,0.29545454545454547
+response_centric,macro,test,unseen,accuracy,0.32476652560922226
+response_centric_aligned,Environment,test,unseen,accuracy,0.32967032967032966
+response_centric_aligned,Role of Government,test,unseen,accuracy,0.3324175824175824
+response_centric_aligned,Social Inequality,test,unseen,accuracy,0.3595505617977528
+response_centric_aligned,Work Orientations,test,unseen,accuracy,0.2869318181818182
+response_centric_aligned,macro,test,unseen,accuracy,0.3271425730168708
+sentence,Environment,test,unseen,accuracy,0.31043956043956045
+sentence,Role of Government,test,unseen,accuracy,0.3232600732600733
+sentence,Social Inequality,test,unseen,accuracy,0.42696629213483145
+sentence,Work Orientations,test,unseen,accuracy,0.35132575757575757
+sentence,macro,test,unseen,accuracy,0.35299792085255566
+sentence_aligned,Environment,test,unseen,accuracy,0.3141025641025641
+sentence_aligned,Role of Government,test,unseen,accuracy,0.27197802197802196
+sentence_aligned,Social Inequality,test,unseen,accuracy,0.3670411985018726
+sentence_aligned,Work Orientations,test,unseen,accuracy,0.3484848484848485
+sentence_aligned,macro,test,unseen,accuracy,0.32540165826682677

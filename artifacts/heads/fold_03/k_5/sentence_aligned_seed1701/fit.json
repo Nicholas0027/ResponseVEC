@@ -1,0 +1,91 @@
+{
+  "family": "sentence_aligned",
+  "base_family": "sentence",
+  "seed": 1701,
+  "fold": 3,
+  "k": 5,
+  "best_epoch": 5,
+  "best_validation_nll": 1.5749805278285256,
+  "history": [
+    {
+      "epoch": 0.0,
+      "train_loss": 1.3589511394500733,
+      "validation_nll": 1.622547012217884
+    },
+    {
+      "epoch": 1.0,
+      "train_loss": 1.3217394173145294,
+      "validation_nll": 1.5795518745090709
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 1.3184292197227478,
+      "validation_nll": 1.6228242756268165
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 1.3126402974128724,
+      "validation_nll": 1.598374326801833
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 1.307100197672844,
+      "validation_nll": 1.609993420499663
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 1.301386332511902,
+      "validation_nll": 1.5749805278285256
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 1.3048008799552917,
+      "validation_nll": 1.6100816188078353
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 1.302037701010704,
+      "validation_nll": 1.5781534003645348
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 1.2982470005750657,
+      "validation_nll": 1.6003804297587059
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 1.2967792063951493,
+      "validation_nll": 1.5826864350774434
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 1.3011019736528397,
+      "validation_nll": 1.6495868535348157
+    },
+    {
+      "epoch": 11.0,
+      "train_loss": 1.297396832704544,
+      "validation_nll": 1.6855304960015767
+    },
+    {
+      "epoch": 12.0,
+      "train_loss": 1.2920299351215363,
+      "validation_nll": 1.6124148332206896
+    },
+    {
+      "epoch": 13.0,
+      "train_loss": 1.297705563902855,
+      "validation_nll": 1.63150351398817
+    },
+    {
+      "epoch": 14.0,
+      "train_loss": 1.2917256981134415,
+      "validation_nll": 1.6264134024441574
+    },
+    {
+      "epoch": 15.0,
+      "train_loss": 1.2980583727359771,
+      "validation_nll": 1.6370340604022895
+    }
+  ]
+}

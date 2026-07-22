@@ -1,0 +1,76 @@
+method,k,split,item_pool,domain,js
+direct_calibrated,5,test,unseen,Environment,0.5949053879025582
+direct_calibrated,5,test,unseen,Role of Government,0.5755759181931216
+direct_calibrated,5,test,unseen,Social Inequality,0.5224958906298792
+direct_calibrated,5,test,unseen,Work Orientations,0.5735590036968258
+direct_raw,5,test,unseen,Environment,0.7068936436037048
+direct_raw,5,test,unseen,Role of Government,0.6017799727736564
+direct_raw,5,test,unseen,Social Inequality,0.6126121315080926
+direct_raw,5,test,unseen,Work Orientations,0.6621838199051518
+direct_scalar,5,test,unseen,Environment,0.5912580623555925
+direct_scalar,5,test,unseen,Role of Government,0.530324446627513
+direct_scalar,5,test,unseen,Social Inequality,0.5292478647434438
+direct_scalar,5,test,unseen,Work Orientations,0.5716940948576803
+direct_selected,5,test,unseen,Environment,0.6048699779050322
+direct_selected,5,test,unseen,Role of Government,0.560946079267627
+direct_selected,5,test,unseen,Social Inequality,0.530705301354407
+direct_selected,5,test,unseen,Work Orientations,0.5773378513867408
+input_centric,5,test,unseen,Environment,0.5323798091181123
+input_centric,5,test,unseen,Role of Government,0.5277313343659985
+input_centric,5,test,unseen,Social Inequality,0.4580790586408514
+input_centric,5,test,unseen,Work Orientations,0.5203757652802676
+input_centric_aligned,5,test,unseen,Environment,0.5404323983350204
+input_centric_aligned,5,test,unseen,Role of Government,0.5231558839161198
+input_centric_aligned,5,test,unseen,Social Inequality,0.4760800366358345
+input_centric_aligned,5,test,unseen,Work Orientations,0.5307850842242393
+raw_final,5,test,unseen,Environment,0.5767374536767861
+raw_final,5,test,unseen,Role of Government,0.5356195025780222
+raw_final,5,test,unseen,Social Inequality,0.46340695963960743
+raw_final,5,test,unseen,Work Orientations,0.5828342971763455
+raw_mean,5,test,unseen,Environment,0.5436803824852953
+raw_mean,5,test,unseen,Role of Government,0.5304772623949358
+raw_mean,5,test,unseen,Social Inequality,0.49108207716093655
+raw_mean,5,test,unseen,Work Orientations,0.5331060514711998
+raw_mean_aligned,5,test,unseen,Environment,0.525323860719181
+raw_mean_aligned,5,test,unseen,Role of Government,0.5081151283677378
+raw_mean_aligned,5,test,unseen,Social Inequality,0.48768619151279435
+raw_mean_aligned,5,test,unseen,Work Orientations,0.533083300092994
+raw_selected,5,test,unseen,Environment,0.5436803824852953
+raw_selected,5,test,unseen,Role of Government,0.5304772623949358
+raw_selected,5,test,unseen,Social Inequality,0.49108207716093655
+raw_selected,5,test,unseen,Work Orientations,0.5331060514711998
+respondent_vec,5,test,unseen,Environment,0.5733347725485809
+respondent_vec,5,test,unseen,Role of Government,0.5161891647712705
+respondent_vec,5,test,unseen,Social Inequality,0.49385010513671684
+respondent_vec,5,test,unseen,Work Orientations,0.5487768986447362
+response_centric,5,test,unseen,Environment,0.5284558272667651
+response_centric,5,test,unseen,Role of Government,0.5124966488374997
+response_centric,5,test,unseen,Social Inequality,0.47750477400079866
+response_centric,5,test,unseen,Work Orientations,0.5280170509057102
+response_centric_aligned,5,test,unseen,Environment,0.5119821893287385
+response_centric_aligned,5,test,unseen,Role of Government,0.4907836409029605
+response_centric_aligned,5,test,unseen,Social Inequality,0.4765845551304838
+response_centric_aligned,5,test,unseen,Work Orientations,0.5353051896380545
+sentence,5,test,unseen,Environment,0.5080430538667845
+sentence,5,test,unseen,Role of Government,0.507841784906835
+sentence,5,test,unseen,Social Inequality,0.45443675308111564
+sentence,5,test,unseen,Work Orientations,0.5176589769734717
+sentence_aligned,5,test,unseen,Environment,0.5103642090866377
+sentence_aligned,5,test,unseen,Role of Government,0.5282541354707847
+sentence_aligned,5,test,unseen,Social Inequality,0.48328997899647325
+sentence_aligned,5,test,unseen,Work Orientations,0.5281896079011893
+direct_calibrated,5,test,unseen,macro,0.5666340501055962
+direct_raw,5,test,unseen,macro,0.6458673919476514
+direct_scalar,5,test,unseen,macro,0.5556311171460574
+direct_selected,5,test,unseen,macro,0.5684648024784518
+input_centric,5,test,unseen,macro,0.5096414918513075
+input_centric_aligned,5,test,unseen,macro,0.5176133507778036
+raw_final,5,test,unseen,macro,0.5396495532676903
+raw_mean,5,test,unseen,macro,0.5245864433780918
+raw_mean_aligned,5,test,unseen,macro,0.5135521201731768
+raw_selected,5,test,unseen,macro,0.5245864433780918
+respondent_vec,5,test,unseen,macro,0.5330377352753262
+response_centric,5,test,unseen,macro,0.5116185752526934
+response_centric_aligned,5,test,unseen,macro,0.5036638937500593
+sentence,5,test,unseen,macro,0.4969951422070517
+sentence_aligned,5,test,unseen,macro,0.5125244828637712

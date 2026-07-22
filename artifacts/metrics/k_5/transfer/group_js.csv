@@ -1,0 +1,26 @@
+method,k,split,item_pool,domain,js
+input_centric,5,ood_intersection,seen,Environment,0.45791496111521846
+input_centric,5,ood_intersection,seen,Role of Government,0.3824163465307847
+input_centric,5,ood_intersection,seen,Social Inequality,0.33763149609861054
+input_centric,5,ood_intersection,seen,Work Orientations,0.35909958298870015
+raw_mean,5,ood_intersection,seen,Environment,0.4465544056953359
+raw_mean,5,ood_intersection,seen,Role of Government,0.3955771392201248
+raw_mean,5,ood_intersection,seen,Social Inequality,0.3530761822751823
+raw_mean,5,ood_intersection,seen,Work Orientations,0.3591455198136581
+raw_selected,5,ood_intersection,seen,Environment,0.45538285226267256
+raw_selected,5,ood_intersection,seen,Role of Government,0.41710587151915113
+raw_selected,5,ood_intersection,seen,Social Inequality,0.3767578134559721
+raw_selected,5,ood_intersection,seen,Work Orientations,0.3920479891633596
+response_centric,5,ood_intersection,seen,Environment,0.43434824948645206
+response_centric,5,ood_intersection,seen,Role of Government,0.40030304102590886
+response_centric,5,ood_intersection,seen,Social Inequality,0.3427081386835686
+response_centric,5,ood_intersection,seen,Work Orientations,0.3548856173821922
+sentence,5,ood_intersection,seen,Environment,0.44280566254567366
+sentence,5,ood_intersection,seen,Role of Government,0.407014288444183
+sentence,5,ood_intersection,seen,Social Inequality,0.3432572416745768
+sentence,5,ood_intersection,seen,Work Orientations,0.36245020592486
+input_centric,5,ood_intersection,seen,macro,0.3842655966833285
+raw_mean,5,ood_intersection,seen,macro,0.3885883117510753
+raw_selected,5,ood_intersection,seen,macro,0.41032363160028884
+response_centric,5,ood_intersection,seen,macro,0.3830612616445304
+sentence,5,ood_intersection,seen,macro,0.38888184964732336

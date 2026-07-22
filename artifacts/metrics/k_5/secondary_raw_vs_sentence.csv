@@ -1,0 +1,2 @@
+method,reference,metric,k,item_pool,difference,ci_low,ci_high,p_two_sided,n_panels,n_items,favors_candidate,holm_reject_null,holm_threshold,practical_effect_met,primary_claim_supported
+raw_selected,sentence,nll,5,unseen,0.16091826954493876,0.10587199307420031,0.2193290282242293,0.0009995002498750624,359,48,False,True,0.05,False,False

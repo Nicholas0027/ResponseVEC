@@ -1,0 +1,19 @@
+{
+  "status": "METADATA_PASS",
+  "versions": {
+    "torch": "2.11.0+cu128",
+    "transformers": "4.56.2",
+    "peft": "0.18.0"
+  },
+  "checkpoint_revisions": {
+    "causal_small": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "input_mntp_small": "36fa4cf0478f9d1c439397ae5690fb8705ac3725",
+    "input_supervised_small": "153ecc27c9359c0b4042506cabc2a9f451c3bc50",
+    "response_small": "ffa5224a05d7ae373f326b1c49f0055680fbf7a6",
+    "causal_primary": "b968826d9c46dd6066d109eabc6255188de91218",
+    "input_mntp_primary": "c84774c1366ea79f033504994bd254155d956d57",
+    "input_supervised_primary": "4e2aabc835ace6256b43e9f08d1f580611ba4bd2",
+    "response_primary": "08214b0dd083b63776c243390db9e40ae7078f36"
+  },
+  "scientific_results": false
+}

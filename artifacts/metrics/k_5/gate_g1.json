@@ -1,0 +1,8 @@
+{
+  "gate": "G1",
+  "supported": false,
+  "responsevec_method": "response_centric",
+  "required_comparisons": 3,
+  "comparisons_supported": 2,
+  "decision": "reframe_or_stop_expensive_extensions"
+}

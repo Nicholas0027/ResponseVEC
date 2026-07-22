@@ -1,0 +1,26 @@
+method,domain,split,item_pool,metric,auac
+input_centric,Environment,ood_intersection,seen,accuracy,0.35111111111111115
+input_centric,Role of Government,ood_intersection,seen,accuracy,0.4863636363636364
+input_centric,Social Inequality,ood_intersection,seen,accuracy,0.45648148148148143
+input_centric,Work Orientations,ood_intersection,seen,accuracy,0.4547169811320755
+input_centric,macro,ood_intersection,seen,accuracy,0.4371683025220761
+raw_mean,Environment,ood_intersection,seen,accuracy,0.3844444444444445
+raw_mean,Role of Government,ood_intersection,seen,accuracy,0.4572727272727272
+raw_mean,Social Inequality,ood_intersection,seen,accuracy,0.4277777777777778
+raw_mean,Work Orientations,ood_intersection,seen,accuracy,0.44716981132075473
+raw_mean,macro,ood_intersection,seen,accuracy,0.42916619020392605
+raw_selected,Environment,ood_intersection,seen,accuracy,0.40222222222222226
+raw_selected,Role of Government,ood_intersection,seen,accuracy,0.40454545454545454
+raw_selected,Social Inequality,ood_intersection,seen,accuracy,0.3925925925925926
+raw_selected,Work Orientations,ood_intersection,seen,accuracy,0.41320754716981134
+raw_selected,macro,ood_intersection,seen,accuracy,0.4031419541325202
+response_centric,Environment,ood_intersection,seen,accuracy,0.3933333333333333
+response_centric,Role of Government,ood_intersection,seen,accuracy,0.45454545454545453
+response_centric,Social Inequality,ood_intersection,seen,accuracy,0.45092592592592595
+response_centric,Work Orientations,ood_intersection,seen,accuracy,0.4641509433962264
+response_centric,macro,ood_intersection,seen,accuracy,0.44073891430023504
+sentence,Environment,ood_intersection,seen,accuracy,0.3966666666666667
+sentence,Role of Government,ood_intersection,seen,accuracy,0.43
+sentence,Social Inequality,ood_intersection,seen,accuracy,0.4416666666666667
+sentence,Work Orientations,ood_intersection,seen,accuracy,0.4547169811320755
+sentence,macro,ood_intersection,seen,accuracy,0.43076257861635225

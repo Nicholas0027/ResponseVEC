@@ -1,0 +1,83 @@
+{
+  "family": "raw_mean_aligned",
+  "base_family": "raw_mean",
+  "seed": 1701,
+  "fold": 0,
+  "k": 5,
+  "best_epoch": 3,
+  "best_validation_loss": 3.8219390035341574,
+  "history": [
+    {
+      "epoch": 0.0,
+      "train_loss": 4.432747477293015,
+      "validation_loss": 4.2001489474120755,
+      "residual_alpha": 0.005177083425223827
+    },
+    {
+      "epoch": 1.0,
+      "train_loss": 3.185210198163986,
+      "validation_loss": 4.015843290190457,
+      "residual_alpha": 0.017729196697473526
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 2.926280915737152,
+      "validation_loss": 3.8920774233407816,
+      "residual_alpha": 0.014086369425058365
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 2.812528970837593,
+      "validation_loss": 3.8219390035341574,
+      "residual_alpha": 0.01566406898200512
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 2.777451661229134,
+      "validation_loss": 3.940427313969788,
+      "residual_alpha": 0.01700144074857235
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 2.7581667840480804,
+      "validation_loss": 3.8967350634782676,
+      "residual_alpha": 0.01926463097333908
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 2.7263944119215013,
+      "validation_loss": 4.603777379297012,
+      "residual_alpha": 0.021014312282204628
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 2.70182084441185,
+      "validation_loss": 4.332453916858694,
+      "residual_alpha": 0.0250236839056015
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 2.6655609548091888,
+      "validation_loss": 4.2112042677469095,
+      "residual_alpha": 0.03210495412349701
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 2.605201816558838,
+      "validation_loss": 4.118088378586583,
+      "residual_alpha": 0.038020651787519455
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 2.593340128660202,
+      "validation_loss": 3.9759951170596333,
+      "residual_alpha": 0.04019126668572426
+    },
+    {
+      "epoch": 11.0,
+      "train_loss": 2.6146889239549638,
+      "validation_loss": 4.0295828520918695,
+      "residual_alpha": 0.03844599798321724
+    }
+  ]
+}

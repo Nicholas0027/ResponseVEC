@@ -1,0 +1,8 @@
+{
+  "checkpoint": "McGill-NLP/LLM2Vec-Qwen3-8B-mntp-supervised",
+  "checkpoint_revision": "4e2aabc835ace6256b43e9f08d1f580611ba4bd2",
+  "base_checkpoint": "McGill-NLP/LLM2Vec-Qwen3-8B-mntp",
+  "base_revision": "c84774c1366ea79f033504994bd254155d956d57",
+  "foundation_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "fingerprint": "07574fd5c4599c47"
+}

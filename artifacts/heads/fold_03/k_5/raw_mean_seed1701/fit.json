@@ -1,0 +1,175 @@
+{
+  "family": "raw_mean",
+  "seed": 1701,
+  "fold": 3,
+  "k": 5,
+  "best_epoch": 22,
+  "best_validation_nll": 1.995640929601046,
+  "history": [
+    {
+      "epoch": 0.0,
+      "train_loss": 31.864941799640654,
+      "validation_nll": 6.12124014597567
+    },
+    {
+      "epoch": 1.0,
+      "train_loss": 4.767779791355133,
+      "validation_nll": 8.210380682431671
+    },
+    {
+      "epoch": 2.0,
+      "train_loss": 4.612688946723938,
+      "validation_nll": 5.298259987225938
+    },
+    {
+      "epoch": 3.0,
+      "train_loss": 4.008482760190963,
+      "validation_nll": 4.557666813528072
+    },
+    {
+      "epoch": 4.0,
+      "train_loss": 3.1453895539045336,
+      "validation_nll": 7.927354304674545
+    },
+    {
+      "epoch": 5.0,
+      "train_loss": 4.307816517353058,
+      "validation_nll": 7.475865343700074
+    },
+    {
+      "epoch": 6.0,
+      "train_loss": 5.841659724712372,
+      "validation_nll": 7.7175968458719355
+    },
+    {
+      "epoch": 7.0,
+      "train_loss": 5.2479954063892365,
+      "validation_nll": 4.890193702016994
+    },
+    {
+      "epoch": 8.0,
+      "train_loss": 3.416659617424011,
+      "validation_nll": 5.1932091110908845
+    },
+    {
+      "epoch": 9.0,
+      "train_loss": 3.5152676582336424,
+      "validation_nll": 3.11334590006141
+    },
+    {
+      "epoch": 10.0,
+      "train_loss": 3.211633226275444,
+      "validation_nll": 7.108330640223531
+    },
+    {
+      "epoch": 11.0,
+      "train_loss": 3.881134349107742,
+      "validation_nll": 3.191930521003819
+    },
+    {
+      "epoch": 12.0,
+      "train_loss": 3.085863897204399,
+      "validation_nll": 2.2736495070201057
+    },
+    {
+      "epoch": 13.0,
+      "train_loss": 2.6202035754919053,
+      "validation_nll": 2.1774833634412487
+    },
+    {
+      "epoch": 14.0,
+      "train_loss": 2.51399986743927,
+      "validation_nll": 3.6837465814913117
+    },
+    {
+      "epoch": 15.0,
+      "train_loss": 3.15574734210968,
+      "validation_nll": 2.1984212771058083
+    },
+    {
+      "epoch": 16.0,
+      "train_loss": 2.922533631324768,
+      "validation_nll": 3.738577627935889
+    },
+    {
+      "epoch": 17.0,
+      "train_loss": 2.250287103652954,
+      "validation_nll": 2.652981849458828
+    },
+    {
+      "epoch": 18.0,
+      "train_loss": 2.1712526470422744,
+      "validation_nll": 3.443798232070488
+    },
+    {
+      "epoch": 19.0,
+      "train_loss": 2.0096599042415617,
+      "validation_nll": 3.470468410535315
+    },
+    {
+      "epoch": 20.0,
+      "train_loss": 2.2413089692592623,
+      "validation_nll": 2.5387610269283782
+    },
+    {
+      "epoch": 21.0,
+      "train_loss": 2.1614995270967485,
+      "validation_nll": 4.04401493092541
+    },
+    {
+      "epoch": 22.0,
+      "train_loss": 2.5560106307268144,
+      "validation_nll": 1.995640929601046
+    },
+    {
+      "epoch": 23.0,
+      "train_loss": 2.5655315846204756,
+      "validation_nll": 2.8701395608026887
+    },
+    {
+      "epoch": 24.0,
+      "train_loss": 2.133491945266724,
+      "validation_nll": 2.405870605176887
+    },
+    {
+      "epoch": 25.0,
+      "train_loss": 2.7080767661333085,
+      "validation_nll": 3.1217675804675626
+    },
+    {
+      "epoch": 26.0,
+      "train_loss": 1.9893889486789704,
+      "validation_nll": 2.4999811297188925
+    },
+    {
+      "epoch": 27.0,
+      "train_loss": 1.816602811217308,
+      "validation_nll": 2.3101092014232827
+    },
+    {
+      "epoch": 28.0,
+      "train_loss": 2.0344289273023604,
+      "validation_nll": 2.627847716253896
+    },
+    {
+      "epoch": 29.0,
+      "train_loss": 1.9837935626506806,
+      "validation_nll": 2.738497584419554
+    },
+    {
+      "epoch": 30.0,
+      "train_loss": 1.9406773924827576,
+      "validation_nll": 2.4047874220797802
+    },
+    {
+      "epoch": 31.0,
+      "train_loss": 1.7908488154411315,
+      "validation_nll": 3.3033420630625328
+    },
+    {
+      "epoch": 32.0,
+      "train_loss": 1.8896508246660233,
+      "validation_nll": 2.2307037691580516
+    }
+  ]
+}

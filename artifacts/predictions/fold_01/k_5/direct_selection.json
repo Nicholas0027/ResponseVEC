@@ -1,0 +1,9 @@
+{
+  "selected": "direct_calibrated",
+  "validation_nll": {
+    "direct_raw": 5.45991325378418,
+    "direct_scalar": 1.680271110761748,
+    "direct_calibrated": 1.628748749782118
+  },
+  "selection_used_test_labels": false
+}

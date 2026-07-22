@@ -1,0 +1,9 @@
+{
+  "seen_k0_nll": 1.328487528317017,
+  "seen_k5_nll": 1.3068551022382155,
+  "seen_history_budget_nats": 0.021632426078801448,
+  "unseen_oracle_headroom_nats": 0.181579645587562,
+  "seen_gate_pass": true,
+  "unseen_gate_pass": true,
+  "oracle_is_non_deployable_diagnostic_only": true
+}

@@ -1,0 +1,26 @@
+method,k,split,item_pool,domain,corr_err,corr_sim
+raw_selected,5,ood_intersection,seen,Environment,0.3639429472103793,0.4689511696440118
+raw_selected,5,ood_intersection,seen,Role of Government,0.29353445019974017,0.3375451771499475
+raw_selected,5,ood_intersection,seen,Social Inequality,0.29019141306753676,0.49395437196092473
+raw_selected,5,ood_intersection,seen,Work Orientations,0.37252271865115255,0.4199783064560147
+raw_mean,5,ood_intersection,seen,Environment,0.3928236708636811,0.5829676531137655
+raw_mean,5,ood_intersection,seen,Role of Government,0.34967856848402795,0.5339172500361027
+raw_mean,5,ood_intersection,seen,Social Inequality,0.33389445492928155,0.5651312033781589
+raw_mean,5,ood_intersection,seen,Work Orientations,0.40510331017864315,0.46461989090816536
+input_centric,5,ood_intersection,seen,Environment,0.275361856815938,0.5843843775569117
+input_centric,5,ood_intersection,seen,Role of Government,0.21427344846973348,0.6238581287832092
+input_centric,5,ood_intersection,seen,Social Inequality,0.275714391607485,0.5957587005087319
+input_centric,5,ood_intersection,seen,Work Orientations,0.3589710411817176,0.4992752548626985
+response_centric,5,ood_intersection,seen,Environment,0.3362764337664409,0.49809129732256413
+response_centric,5,ood_intersection,seen,Role of Government,0.25426263121127457,0.5873488642103069
+response_centric,5,ood_intersection,seen,Social Inequality,0.28587750976799675,0.5805658417269055
+response_centric,5,ood_intersection,seen,Work Orientations,0.34086674867222777,0.4856761109664853
+sentence,5,ood_intersection,seen,Environment,0.481910946370931,0.5401906761310528
+sentence,5,ood_intersection,seen,Role of Government,0.3507644949789502,0.4936642702258845
+sentence,5,ood_intersection,seen,Social Inequality,0.38237731700375244,0.5675678824404825
+sentence,5,ood_intersection,seen,Work Orientations,0.48132126349631316,0.36480127250876776
+input_centric,5,ood_intersection,seen,macro,0.2810801845187185,0.5758191154278879
+raw_mean,5,ood_intersection,seen,macro,0.3703750011139084,0.5366589993590481
+raw_selected,5,ood_intersection,seen,macro,0.33004788228220217,0.43010725630272467
+response_centric,5,ood_intersection,seen,macro,0.304320830854485,0.5379205285565655
+sentence,5,ood_intersection,seen,macro,0.4240935054624867,0.49155602532654685
