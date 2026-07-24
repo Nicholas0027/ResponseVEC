@@ -96,7 +96,8 @@ class CausalExtractor:
     mean-pooled vector). Instruct backbones are wrapped in the chat template
     (the +7.5pt fix carried over from the RAPL scorer)."""
 
-    def __init__(self, model, tokenizer, device, max_length: int = 512, batch_size: int = 32, use_chat_template: bool | None = None):
+    def __init__(self, model, tokenizer, device, max_length: int = 512, batch_size: int = 32,
+                 use_chat_template: bool | None = None, enable_thinking: bool = False):
         import torch
 
         already_placed = (
@@ -112,9 +113,11 @@ class CausalExtractor:
         self.use_chat_template = (
             bool(getattr(tokenizer, "chat_template", None)) if use_chat_template is None else bool(use_chat_template)
         )
+        self.enable_thinking = bool(enable_thinking)
         if self.use_chat_template:
             probe_prefix = self.tokenizer.apply_chat_template(
-                [{"role": "user", "content": "probe"}], tokenize=False, add_generation_prompt=True
+                [{"role": "user", "content": "probe"}], tokenize=False, add_generation_prompt=True,
+                enable_thinking=self.enable_thinking,
             )
             ids = option_token_ids(
                 tokenizer, len(OPTION_LABELS), continuation_prefix=probe_prefix, label_prefix=""
@@ -165,7 +168,8 @@ class CausalExtractor:
             if self.use_chat_template:
                 chunk = [
                     self.tokenizer.apply_chat_template(
-                        [{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True
+                        [{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True,
+                        enable_thinking=self.enable_thinking,
                     )
                     for p in chunk
                 ]

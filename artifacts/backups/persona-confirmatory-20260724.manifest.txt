@@ -1,0 +1,5 @@
+Encrypted archive: persona-confirmatory-20260724.tar.gz.enc
+Encrypted SHA256: 9f733fa227a73533b9b14b56e1d102722a03011d7fb757e58cef97dfe5ec2f6a
+Decrypted tar.gz SHA256: 757072b5f2ac8104efc0e9465e29cbc98649c9d686a79484b2c80eb890a9a0d2
+Encryption: AES-256-CBC, PBKDF2, 200000 iterations
+Decrypt: openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in persona-confirmatory-20260724.tar.gz.enc -out persona-confirmatory-20260724.tar.gz

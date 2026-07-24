@@ -1,0 +1,58 @@
+{
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "primary_hybrid_gate": {
+    "left": "hist_gbdt",
+    "right": "hist_gbdt_llm_hybrid",
+    "nll_difference_right_minus_left": -0.018560919741703277,
+    "bootstrap_95_ci": [
+      -0.02797146326060444,
+      -0.009517157469948606
+    ],
+    "right_beats_left": true,
+    "left_beats_right": false
+  },
+  "router_validity_gate": {
+    "left": "stat_history",
+    "right": "stat_shuffled",
+    "nll_difference_right_minus_left": 0.014661002922405585,
+    "bootstrap_95_ci": [
+      0.005325635678219037,
+      0.02427717827563482
+    ],
+    "right_beats_left": false,
+    "left_beats_right": true
+  },
+  "llm_router_gate": {
+    "left": "llm_persona_prior",
+    "right": "llm_persona_history",
+    "nll_difference_right_minus_left": -0.015219946502015561,
+    "bootstrap_95_ci": [
+      -0.021123910145305444,
+      -0.009006549757678789
+    ],
+    "right_beats_left": true,
+    "left_beats_right": false
+  },
+  "development_fold_excluded": true,
+  "bootstrap_unit": "panel_id",
+  "bootstrap_draws": 5000,
+  "bootstrap_seed": 1701,
+  "post_freeze_item_robustness": {
+    "unit": "question_key stratified by domain",
+    "items": 40,
+    "nll_difference_right_minus_left": -0.01848682415685503,
+    "bootstrap_95_ci": [
+      -0.049169763370792326,
+      0.009135171192562984
+    ],
+    "items_right_better": 23,
+    "draws": 10000
+  },
+  "confirmatory_success": true
+}
