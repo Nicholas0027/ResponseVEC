@@ -1,0 +1,25 @@
+{
+  "fold": 1,
+  "seed": 1701,
+  "k": 5,
+  "r": 32,
+  "variants": [
+    "pe_no_persona",
+    "pe_demographic",
+    "pe_demographic_behavior",
+    "pe_history",
+    "pe_shuffled_behavior"
+  ],
+  "temperatures": {
+    "pe_no_persona": 13.235560905901918,
+    "pe_demographic": 15.568133995493483,
+    "pe_demographic_behavior": 16.011729261682248,
+    "pe_history": 12.489871294304551,
+    "pe_shuffled_behavior": 14.447625680572553
+  },
+  "temperature_source": "validation_only",
+  "reader": "qwen_causal",
+  "mode": "ADAPTED",
+  "method_family": "persona_effect_prompting",
+  "reference": "Hu & Collier, ACL 2024"
+}

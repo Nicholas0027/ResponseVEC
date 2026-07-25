@@ -247,14 +247,17 @@ def build_prompt(row, options: Sequence[str], evidence: Sequence[PersonaRecord],
 
 
 def make_causal_reader(model_name: str, seed: int = 1701, max_length: int = 512,
-                       batch_size: int = 16) -> OptionProbFn:
-    """Real Qwen3-8B reader: option-token probabilities with thinking disabled.
+                       batch_size: int = 16, quantization: str | None = None) -> OptionProbFn:
+    """Real causal reader: option-token probabilities with thinking disabled.
 
     torch/transformers are imported here so the CPU path never needs them.
+    ``quantization`` is passed through to ``load_causal_backbone`` (e.g. "nf4"
+    for large backbones that do not fit in bf16 on a single card).
     """
     from responsevec.llm_rv import CausalExtractor, choose_device, load_causal_backbone
 
-    model, tokenizer = load_causal_backbone(model_name, dtype="bfloat16")
+    model, tokenizer = load_causal_backbone(model_name, dtype="bfloat16",
+                                            quantization=quantization)
     extractor = CausalExtractor(model, tokenizer, choose_device(), max_length=max_length,
                                 batch_size=batch_size, enable_thinking=False)
 

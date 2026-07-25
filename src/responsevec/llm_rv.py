@@ -31,6 +31,10 @@ def resolve_quantization(quantization: str | None) -> str | None:
 
     if quantization not in ("nf4", "auto"):
         return quantization
+    # Explicit "nf4" always quantizes (needed for large backbones that do not
+    # fit in bf16 on a single card). Only "auto" defers to the GPU-size heuristic.
+    if quantization == "nf4":
+        return None if not torch.cuda.is_available() else "nf4"
     if torch.cuda.is_available() and torch.cuda.get_device_properties(0).total_memory >= 30e9:
         print("[rv] large GPU detected — running bf16 (no quantization)")
         return None
