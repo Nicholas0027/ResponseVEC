@@ -1,0 +1,41 @@
+{
+  "fold": 5,
+  "seed": 1701,
+  "k": 5,
+  "top_neighbors": 10,
+  "top_evidence": 5,
+  "join_threshold": 3,
+  "temperatures": {
+    "personadb_history_full": 9.14077867134088,
+    "personadb_history_retrieval": 9.88491210000176,
+    "personadb_intsum": 11.378348651071454,
+    "personadb_nojoin": 8.375424958578362,
+    "personadb_full": 8.375424958578362
+  },
+  "temperature_source": "validation_only",
+  "join_report": {
+    "personadb_history_full": {
+      "validation_join_rows": 0,
+      "test_join_rows": 0
+    },
+    "personadb_history_retrieval": {
+      "validation_join_rows": 0,
+      "test_join_rows": 0
+    },
+    "personadb_intsum": {
+      "validation_join_rows": 0,
+      "test_join_rows": 0
+    },
+    "personadb_nojoin": {
+      "validation_join_rows": 0,
+      "test_join_rows": 0
+    },
+    "personadb_full": {
+      "validation_join_rows": 0,
+      "test_join_rows": 0
+    }
+  },
+  "reader": "qwen_causal",
+  "mode": "ADAPTED",
+  "n_train_neighbors_available": 1255
+}
