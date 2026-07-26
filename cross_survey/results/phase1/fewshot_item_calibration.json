@@ -342,6 +342,17 @@
       "accuracy_headroom_recovered_pct": 99.09263913824059
     },
     {
+      "method": "tfidf",
+      "nll": 1.2904559248366165,
+      "accuracy": 0.33782462137397334,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9,
+      "nll_headroom_recovered_pct": 11.12276264399485,
+      "accuracy_headroom_recovered_pct": 5.859964093357278
+    },
+    {
       "method": "uniform",
       "nll": 1.330988898247697,
       "accuracy": 0.3223282533352324,
@@ -380,7 +391,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": 0.06089319574481,
         "nll_ci": [
           -0.014737842776779995,
@@ -393,6 +404,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": 0.06089319574481,
+        "nll_ci": [
+          -0.016286133264536325,
+          0.24794684028343658
+        ],
+        "left_minus_right_accuracy": 0.022546645776954848,
+        "accuracy_ci": [
+          -0.060642840837862894,
+          0.09326536401087017
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m0": {
@@ -410,7 +435,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.42530781743921475,
         "nll_ci": [
           -0.6170362988678182,
@@ -423,6 +448,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.42530781743921475,
+        "nll_ci": [
+          -0.7829313710958686,
+          -0.24556985229380554
+        ],
+        "left_minus_right_accuracy": 0.2418981151782747,
+        "accuracy_ci": [
+          0.17129201896695725,
+          0.3892633881569487
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m0_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": 0.10142616915589035,
+        "nll_ci": [
+          0.09820030222696922,
+          0.10467612755211628
+        ],
+        "left_minus_right_accuracy": 0.00705027773821393,
+        "accuracy_ci": [
+          0.004776825052157027,
+          0.00936292550273034
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": 0.10142616915589035,
+        "nll_ci": [
+          0.003614136125998685,
+          0.23093471959227563
+        ],
+        "left_minus_right_accuracy": 0.00705027773821393,
+        "accuracy_ci": [
+          -0.10283612387747028,
+          0.09814282232075933
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": 0.10142616915589035,
+        "nll_ci": [
+          0.002482455941611892,
+          0.3358297780136736
+        ],
+        "left_minus_right_accuracy": 0.00705027773821393,
+        "accuracy_ci": [
+          -0.16753441221349044,
+          0.12067701507307739
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m5_vs_uniform": {
@@ -440,7 +523,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": 0.2262753859633862,
         "nll_ci": [
           -0.0016583138368123698,
@@ -453,6 +536,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": 0.2262753859633862,
+        "nll_ci": [
+          -0.07677035609298175,
+          0.4273263682858772
+        ],
+        "left_minus_right_accuracy": 0.16111759958220578,
+        "accuracy_ci": [
+          0.06650301374072903,
+          0.28070265894176016
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m5": {
@@ -470,7 +567,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.5906900076577911,
         "nll_ci": [
           -0.7259448545831139,
@@ -483,6 +580,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.5906900076577911,
+        "nll_ci": [
+          -0.7899131814235472,
+          -0.3900830945161676
+        ],
+        "left_minus_right_accuracy": 0.1033271613730238,
+        "accuracy_ci": [
+          0.07612493815184886,
+          0.14475741278784363
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m5_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": 0.2668083593744665,
+        "nll_ci": [
+          0.2615093767061457,
+          0.27213206138651197
+        ],
+        "left_minus_right_accuracy": 0.14562123154346482,
+        "accuracy_ci": [
+          0.14271980489317523,
+          0.1484190882923256
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": 0.2668083593744665,
+        "nll_ci": [
+          0.08263805508713405,
+          0.42273935403118046
+        ],
+        "left_minus_right_accuracy": 0.14562123154346482,
+        "accuracy_ci": [
+          0.08316769902629756,
+          0.21521969678012184
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": 0.2668083593744665,
+        "nll_ci": [
+          0.03605653639185985,
+          0.4426771223448882
+        ],
+        "left_minus_right_accuracy": 0.14562123154346482,
+        "accuracy_ci": [
+          0.07582801110692032,
+          0.22344461244464658
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m10_vs_uniform": {
@@ -500,7 +655,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.03327509690925239,
         "nll_ci": [
           -0.2133616269900463,
@@ -513,6 +668,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.03327509690925239,
+        "nll_ci": [
+          -0.3030872301803354,
+          0.10720641228067133
+        ],
+        "left_minus_right_accuracy": 0.17823481935146943,
+        "accuracy_ci": [
+          0.08106544599462233,
+          0.30186564088920387
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m10": {
@@ -530,7 +699,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.33113952478515246,
         "nll_ci": [
           -0.4274123690897689,
@@ -543,6 +712,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.33113952478515246,
+        "nll_ci": [
+          -0.4641454364523301,
+          -0.15749844011882813
+        ],
+        "left_minus_right_accuracy": 0.08620994160376014,
+        "accuracy_ci": [
+          0.06677133038365618,
+          0.1145380758781494
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m10_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": 0.007257876501827919,
+        "nll_ci": [
+          0.0014740281397007452,
+          0.013136238676354217
+        ],
+        "left_minus_right_accuracy": 0.1627384513127285,
+        "accuracy_ci": [
+          0.15979246161310653,
+          0.16568349257883713
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": 0.007257876501827919,
+        "nll_ci": [
+          -0.13213601165585967,
+          0.12029849702080694
+        ],
+        "left_minus_right_accuracy": 0.1627384513127285,
+        "accuracy_ci": [
+          0.09386449111115967,
+          0.2420260414742096
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": 0.007257876501827919,
+        "nll_ci": [
+          -0.1909584892693625,
+          0.11821835417025335
+        ],
+        "left_minus_right_accuracy": 0.1627384513127285,
+        "accuracy_ci": [
+          0.07581242692018593,
+          0.2595234934565834
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m20_vs_uniform": {
@@ -560,7 +787,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.18981024779787622,
         "nll_ci": [
           -0.360169698288597,
@@ -573,6 +800,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.18981024779787622,
+        "nll_ci": [
+          -0.4579080702787977,
+          -0.07065852236332551
+        ],
+        "left_minus_right_accuracy": 0.21492380002848593,
+        "accuracy_ci": [
+          0.11606157250685804,
+          0.3433437794890315
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m20": {
@@ -590,7 +831,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.17460437389652866,
         "nll_ci": [
           -0.22945552426421875,
@@ -603,6 +844,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.17460437389652866,
+        "nll_ci": [
+          -0.2560272512170283,
+          -0.06434961002875718
+        ],
+        "left_minus_right_accuracy": 0.049520960926743574,
+        "accuracy_ci": [
+          0.024918163963046476,
+          0.07373937607824511
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m20_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.14927727438679583,
+        "nll_ci": [
+          -0.15546254698934517,
+          -0.14337810631540682
+        ],
+        "left_minus_right_accuracy": 0.19942743198974502,
+        "accuracy_ci": [
+          0.19623007868342357,
+          0.20264033275843218
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.14927727438679583,
+        "nll_ci": [
+          -0.29026834115827765,
+          -0.03918922612300013
+        ],
+        "left_minus_right_accuracy": 0.19942743198974502,
+        "accuracy_ci": [
+          0.12124860127823138,
+          0.28760212009447744
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.14927727438679583,
+        "nll_ci": [
+          -0.3431885218643289,
+          -0.060728147035992344
+        ],
+        "left_minus_right_accuracy": 0.19942743198974502,
+        "accuracy_ci": [
+          0.10308941300558412,
+          0.31415761818911164
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m50_vs_uniform": {
@@ -620,7 +919,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.29149764189698857,
         "nll_ci": [
           -0.4466800256279486,
@@ -633,6 +932,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.29149764189698857,
+        "nll_ci": [
+          -0.5307707719678187,
+          -0.17276968542315516
+        ],
+        "left_minus_right_accuracy": 0.24168636946303942,
+        "accuracy_ci": [
+          0.14319432044834296,
+          0.36594532688854065
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m50": {
@@ -650,7 +963,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.07291697979741625,
         "nll_ci": [
           -0.09228451977253707,
@@ -663,6 +976,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.07291697979741625,
+        "nll_ci": [
+          -0.10506273727652815,
+          -0.038064903007414025
+        ],
+        "left_minus_right_accuracy": 0.022758391492190094,
+        "accuracy_ci": [
+          0.009550683636286514,
+          0.035198596268856935
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m50_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.25096466848590826,
+        "nll_ci": [
+          -0.2571240332577665,
+          -0.24491877753366528
+        ],
+        "left_minus_right_accuracy": 0.22619000142429851,
+        "accuracy_ci": [
+          0.2227931679112326,
+          0.22962190021553353
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.25096466848590826,
+        "nll_ci": [
+          -0.37428832710370447,
+          -0.1591695032190011
+        ],
+        "left_minus_right_accuracy": 0.22619000142429851,
+        "accuracy_ci": [
+          0.14870423925088203,
+          0.31551019031564814
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.25096466848590826,
+        "nll_ci": [
+          -0.42821749465783016,
+          -0.15474492337795812
+        ],
+        "left_minus_right_accuracy": 0.22619000142429851,
+        "accuracy_ci": [
+          0.12793506415871825,
+          0.3401363916503658
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m100_vs_uniform": {
@@ -680,7 +1051,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.3207069641407702,
         "nll_ci": [
           -0.46608219955096647,
@@ -693,6 +1064,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.3207069641407702,
+        "nll_ci": [
+          -0.5486294652088647,
+          -0.2001079821349973
+        ],
+        "left_minus_right_accuracy": 0.2528737596733609,
+        "accuracy_ci": [
+          0.15773351602481422,
+          0.37227859454468326
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m100": {
@@ -710,7 +1095,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.04370765755363455,
         "nll_ci": [
           -0.058210506010249415,
@@ -723,6 +1108,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.04370765755363455,
+        "nll_ci": [
+          -0.06314575962542404,
+          -0.021285815558556104
+        ],
+        "left_minus_right_accuracy": 0.011571001281868675,
+        "accuracy_ci": [
+          0.006201488340056196,
+          0.019649737662457135
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m100_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.28017399072968996,
+        "nll_ci": [
+          -0.28648945602674075,
+          -0.2739897347113142
+        ],
+        "left_minus_right_accuracy": 0.23737739163461996,
+        "accuracy_ci": [
+          0.23386807055802492,
+          0.24078618212555344
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.28017399072968996,
+        "nll_ci": [
+          -0.4049357795756249,
+          -0.1894102338095001
+        ],
+        "left_minus_right_accuracy": 0.23737739163461996,
+        "accuracy_ci": [
+          0.15782477355876998,
+          0.32654901964584204
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.28017399072968996,
+        "nll_ci": [
+          -0.45161965300326334,
+          -0.176668167700258
+        ],
+        "left_minus_right_accuracy": 0.23737739163461996,
+        "accuracy_ci": [
+          0.14073745891845704,
+          0.3469759699007181
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m200_vs_uniform": {
@@ -740,7 +1183,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.3394375096636681,
         "nll_ci": [
           -0.48663850915079293,
@@ -753,6 +1196,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.3394375096636681,
+        "nll_ci": [
+          -0.5695289031608514,
+          -0.211564153931805
+        ],
+        "left_minus_right_accuracy": 0.25860323790533163,
+        "accuracy_ci": [
+          0.16707896067804653,
+          0.3763720980719394
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m200": {
@@ -770,7 +1227,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.024977112030736683,
         "nll_ci": [
           -0.03122193583040768,
@@ -783,6 +1240,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.024977112030736683,
+        "nll_ci": [
+          -0.032527796796409034,
+          -0.01551426451677139
+        ],
+        "left_minus_right_accuracy": 0.005841523049897924,
+        "accuracy_ci": [
+          0.002815015164924218,
+          0.008257017320308398
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m200_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.2989045362525879,
+        "nll_ci": [
+          -0.30524610819339565,
+          -0.29255721907159243
+        ],
+        "left_minus_right_accuracy": 0.2431068698665907,
+        "accuracy_ci": [
+          0.2395645044002147,
+          0.24662761454018586
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.2989045362525879,
+        "nll_ci": [
+          -0.4231140529352428,
+          -0.20612177690913505
+        ],
+        "left_minus_right_accuracy": 0.2431068698665907,
+        "accuracy_ci": [
+          0.16603414799102992,
+          0.3305974864989093
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.2989045362525879,
+        "nll_ci": [
+          -0.4742991984373986,
+          -0.18746196015111244
+        ],
+        "left_minus_right_accuracy": 0.2431068698665907,
+        "accuracy_ci": [
+          0.14983656229261752,
+          0.350802233938823
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "fewshot_m500_vs_uniform": {
@@ -800,7 +1315,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.35936446566145736,
         "nll_ci": [
           -0.506237293093437,
@@ -813,6 +1328,20 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.35936446566145736,
+        "nll_ci": [
+          -0.5903634017290534,
+          -0.23095275421497768
+        ],
+        "left_minus_right_accuracy": 0.2620747281963633,
+        "accuracy_ci": [
+          0.17151975151259044,
+          0.37838317450475195
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     },
     "warm_oracle_vs_fewshot_m500": {
@@ -830,7 +1359,7 @@
         "clusters": 10190,
         "unit": "respondent"
       },
-      "family": {
+      "item": {
         "left_minus_right_nll": -0.005050156032947521,
         "nll_ci": [
           -0.008824672729189968,
@@ -843,6 +1372,64 @@
         ],
         "clusters": 21,
         "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.005050156032947521,
+        "nll_ci": [
+          -0.01093148164837997,
+          0.0024015724864024216
+        ],
+        "left_minus_right_accuracy": 0.0023700327588662565,
+        "accuracy_ci": [
+          0.0009827382984459465,
+          0.003438791689311928
+        ],
+        "clusters": 9,
+        "unit": "family"
+      }
+    },
+    "fewshot_m500_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.31883149225037694,
+        "nll_ci": [
+          -0.3251010281877481,
+          -0.31259574322830147
+        ],
+        "left_minus_right_accuracy": 0.24657836015762236,
+        "accuracy_ci": [
+          0.24305345821372323,
+          0.25005675714176967
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.31883149225037694,
+        "nll_ci": [
+          -0.44082727563899765,
+          -0.2264228749571676
+        ],
+        "left_minus_right_accuracy": 0.24657836015762236,
+        "accuracy_ci": [
+          0.17012487729167025,
+          0.33406451992710184
+        ],
+        "clusters": 21,
+        "unit": "item"
+      },
+      "family": {
+        "left_minus_right_nll": -0.31883149225037694,
+        "nll_ci": [
+          -0.49210898406481385,
+          -0.20693215527262523
+        ],
+        "left_minus_right_accuracy": 0.24657836015762236,
+        "accuracy_ci": [
+          0.15494011018601284,
+          0.3532528622579963
+        ],
+        "clusters": 9,
+        "unit": "family"
       }
     }
   }

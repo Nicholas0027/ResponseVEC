@@ -149,6 +149,7 @@ def main():
     parser.add_argument("--options", default="cross_survey/metadata/ces2020_all_item_options.csv")
     parser.add_argument("--folds", default="cross_survey/metadata/ces2020_cold_item_folds.json")
     parser.add_argument("--output", default="cross_survey/results/phase1/fewshot_item_calibration.json")
+    parser.add_argument("--cold-rows", default="cross_survey/results/phase1/cold_item_loading.rows.parquet")
     parser.add_argument("--pilot-sizes", type=int, nargs="*", default=PILOT_SIZES)
     parser.add_argument("--draws", type=int, default=5)
     parser.add_argument("--seed", type=int, default=1701)
@@ -267,6 +268,14 @@ def main():
         nll=("nll", "mean"), correct=("correct", "mean"))
     pooled = pooled.rename(columns={"arm": "method"})
 
+    cold_rows_path = Path(args.cold_rows)
+    if cold_rows_path.exists():
+        cold_rows = pd.read_parquet(cold_rows_path)
+        cold_rows = cold_rows[cold_rows.method.eq("tfidf")][
+            ["method", "item", "family", "panel_id", "nll", "correct"]
+        ]
+        pooled = pd.concat([pooled, cold_rows], ignore_index=True)
+
     summary = pooled.groupby("method").agg(
         nll=("nll", "mean"), accuracy=("correct", "mean"),
         rows=("nll", "size"), respondents=("panel_id", "nunique"),
@@ -284,23 +293,49 @@ def main():
     summary["accuracy_headroom_recovered_pct"] = (
         (summary.accuracy - uniform_acc) / headroom_acc * 100.0)
 
+    def clustered(left: str, right: str, unit: str, draws: int = 5000) -> dict:
+        key = ["panel_id", "item"]
+        a = pooled[pooled.method.eq(left)][key + ["family", "nll", "correct"]]
+        b = pooled[pooled.method.eq(right)][key + ["nll", "correct"]]
+        merged = a.merge(b, on=key, suffixes=("_a", "_b"), validate="one_to_one")
+        merged["nll_gap"] = merged.nll_a - merged.nll_b
+        merged["acc_gap"] = merged.correct_a - merged.correct_b
+        cluster_col = {"respondent": "panel_id", "item": "item", "family": "family"}[unit]
+        grouped = list(merged.groupby(cluster_col))
+        clusters = np.asarray([g[["nll_gap", "acc_gap"]].mean().to_numpy()
+                               for _, g in grouped])
+        sizes = np.asarray([len(g) for _, g in grouped], float)
+        rng_boot = np.random.default_rng(args.seed)
+        boot = np.empty((draws, 2))
+        for draw in range(draws):
+            pick = rng_boot.integers(0, len(clusters), len(clusters))
+            boot[draw] = np.average(clusters[pick], axis=0, weights=sizes[pick])
+        return {
+            "left_minus_right_nll": float(merged.nll_gap.mean()),
+            "nll_ci": np.quantile(boot[:, 0], [0.025, 0.975]).tolist(),
+            "left_minus_right_accuracy": float(merged.acc_gap.mean()),
+            "accuracy_ci": np.quantile(boot[:, 1], [0.025, 0.975]).tolist(),
+            "clusters": int(len(clusters)), "unit": unit,
+        }
+
     comparisons = {}
     for m in args.pilot_sizes:
         arm = f"fewshot_m{m}"
         if arm not in pooled.method.values:
             continue
         comparisons[f"{arm}_vs_uniform"] = {
-            "respondent": cold.clustered_comparison(pooled, arm, "uniform",
-                                                    "respondent", args.seed),
-            "family": cold.clustered_comparison(pooled, arm, "uniform",
-                                                "item", args.seed),
+            unit: clustered(arm, "uniform", unit)
+            for unit in ("respondent", "item", "family")
         }
         comparisons[f"warm_oracle_vs_{arm}"] = {
-            "respondent": cold.clustered_comparison(pooled, "warm_oracle", arm,
-                                                    "respondent", args.seed),
-            "family": cold.clustered_comparison(pooled, "warm_oracle", arm,
-                                                "item", args.seed),
+            unit: clustered("warm_oracle", arm, unit)
+            for unit in ("respondent", "item", "family")
         }
+        if "tfidf" in pooled.method.values:
+            comparisons[f"{arm}_vs_tfidf"] = {
+                unit: clustered(arm, "tfidf", unit)
+                for unit in ("respondent", "item", "family")
+            }
 
     payload = {
         "dataset": "ces2020", "phase": "fewshot_item_calibration",
@@ -322,6 +357,7 @@ def main():
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, indent=2))
+    pooled.to_parquet(output.with_suffix(".rows.parquet"), index=False)
     show = summary[summary.method.str.startswith(("fewshot_m", "uniform", "warm"))]
     print(show.to_string(index=False))
     print(f"wrote {output}")
