@@ -1,0 +1,8 @@
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+__pycache__/
+*.pyc
+results/**/*_raw.json
+results/**/*.rows.parquet

@@ -1,0 +1,346 @@
+{
+  "dataset": "ces2020",
+  "phase": "latent_dimension_ceiling",
+  "post_freeze": true,
+  "exploratory": true,
+  "source_items": [
+    "CC20_300a",
+    "CC20_302",
+    "CC20_303",
+    "CC20_309e",
+    "CC20_327a",
+    "CC20_327b",
+    "CC20_327c",
+    "CC20_327d",
+    "CC20_327e",
+    "CC20_327f",
+    "CC20_330a",
+    "CC20_330b",
+    "CC20_330c",
+    "CC20_332a",
+    "CC20_332b",
+    "CC20_332c",
+    "CC20_332d",
+    "CC20_332e",
+    "CC20_332f",
+    "CC20_332g",
+    "CC20_333a",
+    "CC20_333b",
+    "CC20_333c",
+    "CC20_333d",
+    "CC20_351a",
+    "CC20_351b",
+    "CC20_356",
+    "CC20_356a",
+    "CC20_361"
+  ],
+  "target_items": [
+    "CC20_433a",
+    "CC20_420_6",
+    "CC20_443_4",
+    "CC20_442d",
+    "CC20_440a",
+    "CC20_441a",
+    "CC20_431a",
+    "CC20_432a",
+    "CC20_401",
+    "CC20_410"
+  ],
+  "split_counts": {
+    "train": 27159,
+    "validation": 9297,
+    "test": 8950
+  },
+  "onehot_features": 104,
+  "results": [
+    {
+      "dimension": 0,
+      "true_history": {
+        "nll": 0.8335527777131515,
+        "accuracy": 0.6061564245810056,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 0.8335527777131515,
+        "accuracy": 0.6061564245810056,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": false
+      },
+      "svd_explained_variance_cumulative": 0.0
+    },
+    {
+      "dimension": 1,
+      "true_history": {
+        "nll": 0.6886097352200511,
+        "accuracy": 0.7035418994413408,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 0.9574244298424804,
+        "accuracy": 0.5620558659217877,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.26881469462242946,
+        "ci": [
+          0.26102294759048744,
+          0.27694975314266645
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.0224051014488929
+    },
+    {
+      "dimension": 2,
+      "true_history": {
+        "nll": 0.6562177500434924,
+        "accuracy": 0.7116424581005587,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 1.0931506376589568,
+        "accuracy": 0.553608938547486,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.43693288761546445,
+        "ci": [
+          0.4250144049264267,
+          0.4495312611084731
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.3151582204803155
+    },
+    {
+      "dimension": 4,
+      "true_history": {
+        "nll": 0.6582150541526461,
+        "accuracy": 0.7116424581005587,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 1.056445756996667,
+        "accuracy": 0.5545251396648044,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.39823070284402085,
+        "ci": [
+          0.3872597541198698,
+          0.4095811108888054
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.3997397843664748
+    },
+    {
+      "dimension": 8,
+      "true_history": {
+        "nll": 0.6551262171212032,
+        "accuracy": 0.7126256983240223,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 1.0800426816603004,
+        "accuracy": 0.554268156424581,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.4249164645390972,
+        "ci": [
+          0.41326399915655515,
+          0.4371639316880331
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.5182970390819288
+    },
+    {
+      "dimension": 16,
+      "true_history": {
+        "nll": 0.6635570018813123,
+        "accuracy": 0.7118994413407821,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 1.012170179227723,
+        "accuracy": 0.5551284916201117,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.34861317734641045,
+        "ci": [
+          0.3392330773559892,
+          0.35841534663985664
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.6971665983934909
+    },
+    {
+      "dimension": 24,
+      "true_history": {
+        "nll": 0.6631356706960461,
+        "accuracy": 0.7123351955307262,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "matched_wrong_history": {
+        "nll": 1.0252123895014995,
+        "accuracy": 0.5539106145251397,
+        "rows": 89500,
+        "respondents": 8950,
+        "targets": 10
+      },
+      "identity_gap": {
+        "gap_nats": 0.36207671880545317,
+        "ci": [
+          0.352412282401423,
+          0.37239456466996007
+        ],
+        "respondents": 8950,
+        "draws": 2000,
+        "true_history_better": true
+      },
+      "svd_explained_variance_cumulative": 0.8224415301085042
+    }
+  ],
+  "comparisons": {
+    "d2_vs_d1": {
+      "nll": {
+        "difference": -0.03239198517655866,
+        "ci": [
+          -0.03381052437633027,
+          -0.030968555804457468
+        ],
+        "draws": 5000
+      },
+      "accuracy": {
+        "difference": 0.008100558659217877,
+        "ci": [
+          0.006513966480446927,
+          0.00970949720670391
+        ],
+        "draws": 5000
+      }
+    },
+    "d4_vs_d1": {
+      "nll": {
+        "difference": -0.03039468106740502,
+        "ci": [
+          -0.03170511853127032,
+          -0.029090283073738683
+        ],
+        "draws": 5000
+      },
+      "accuracy": {
+        "difference": 0.008100558659217877,
+        "ci": [
+          0.006581005586592178,
+          0.009642458100558658
+        ],
+        "draws": 5000
+      }
+    },
+    "d8_vs_d1": {
+      "nll": {
+        "difference": -0.03348351809884785,
+        "ci": [
+          -0.03488286148646931,
+          -0.03209372585071836
+        ],
+        "draws": 5000
+      },
+      "accuracy": {
+        "difference": 0.009083798882681562,
+        "ci": [
+          0.007474581005586593,
+          0.01064804469273743
+        ],
+        "draws": 5000
+      }
+    },
+    "d16_vs_d1": {
+      "nll": {
+        "difference": -0.02505273333873873,
+        "ci": [
+          -0.026345231154132245,
+          -0.02380265197569709
+        ],
+        "draws": 5000
+      },
+      "accuracy": {
+        "difference": 0.008357541899441339,
+        "ci": [
+          0.006815642458100559,
+          0.009932960893854748
+        ],
+        "draws": 5000
+      }
+    },
+    "d24_vs_d1": {
+      "nll": {
+        "difference": -0.025474064524004983,
+        "ci": [
+          -0.026927380625860208,
+          -0.0240872520744797
+        ],
+        "draws": 5000
+      },
+      "accuracy": {
+        "difference": 0.008793296089385474,
+        "ci": [
+          0.007184357541899441,
+          0.010435754189944134
+        ],
+        "draws": 5000
+      }
+    }
+  },
+  "caveat": "TruncatedSVD factors are preliminary, not identified ordinal IRT traits."
+}

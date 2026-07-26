@@ -1,0 +1,59 @@
+{
+  "dataset": "Cooperative Election Study Common Content, 2020",
+  "doi": "https://doi.org/10.7910/DVN/E9N6PH",
+  "dataverse_dataset_id": 4462964,
+  "version": "4.0",
+  "release_time": "2022-02-14T21:15:40Z",
+  "license": {
+    "name": "CC0 1.0",
+    "uri": "http://creativecommons.org/publicdomain/zero/1.0",
+    "iconUri": "https://licensebuttons.net/p/zero/1.0/88x31.png",
+    "rightsIdentifier": "CC0-1.0",
+    "rightsIdentifierScheme": "SPDX",
+    "schemeUri": "https://spdx.org/licenses/",
+    "languageCode": "en"
+  },
+  "api": "https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/E9N6PH",
+  "files": [
+    {
+      "label": "CCES Guide 2020.pdf",
+      "file_id": 5793681,
+      "bytes": 879624,
+      "content_type": "application/pdf",
+      "source_url": "https://dataverse.harvard.edu/api/access/datafile/5793681",
+      "md5": "b231d8212dcb2fbcd729f6d6d8204252",
+      "sha256": "b55533196a58716b95d197ec21bd854a875edceea9e41c1e3271fec6c526fb9d",
+      "restricted": false
+    },
+    {
+      "label": "CES20_Common_OUTPUT_vv.csv",
+      "file_id": 4949558,
+      "bytes": 188283717,
+      "content_type": "text/csv",
+      "source_url": "https://dataverse.harvard.edu/api/access/datafile/4949558",
+      "md5": "8d8eaafae849016773b911b82faa6e16",
+      "sha256": "946afde863a1c1319bb2931bbd24650961aedae27f36e6447ecdc7db68f83c4c",
+      "restricted": false
+    },
+    {
+      "label": "CES20_Common_post_qx.pdf",
+      "file_id": 4462966,
+      "bytes": 827715,
+      "content_type": "application/pdf",
+      "source_url": "https://dataverse.harvard.edu/api/access/datafile/4462966",
+      "md5": "91297b9a90030c4a32855834192ee720",
+      "sha256": "83f1f5589a116fba641bb4ff1ae676b04a98454ee4bdeba8f1c90ff8803c7607",
+      "restricted": false
+    },
+    {
+      "label": "CES20_Common_pre_qx.pdf",
+      "file_id": 4462965,
+      "bytes": 764504,
+      "content_type": "application/pdf",
+      "source_url": "https://dataverse.harvard.edu/api/access/datafile/4462965",
+      "md5": "f883a0b86e9c811c76d7e1aa5865fa36",
+      "sha256": "2977c08f7969592cbbb271f7434bfa049d50faa0207e6ce65e7db496afbee199",
+      "restricted": false
+    }
+  ]
+}

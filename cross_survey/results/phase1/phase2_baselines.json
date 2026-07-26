@@ -1,0 +1,59 @@
+{
+  "dataset": "ces2020",
+  "phase": "coverage_ablation_baselines",
+  "post_freeze": true,
+  "targets": [
+    "CC20_433a",
+    "CC20_420_6",
+    "CC20_443_4",
+    "CC20_442d",
+    "CC20_440a",
+    "CC20_441a",
+    "CC20_431a",
+    "CC20_432a",
+    "CC20_401",
+    "CC20_410"
+  ],
+  "split_counts": {
+    "train": 27159,
+    "test": 8950
+  },
+  "population": {
+    "nll": 0.8801460901297147,
+    "accuracy": 0.5716201117318436,
+    "rows": 89500,
+    "respondents": 8950,
+    "targets": 10
+  },
+  "demographics_extratrees": {
+    "nll": 0.8333572685412283,
+    "accuracy": 0.606268156424581,
+    "rows": 89500,
+    "respondents": 8950,
+    "targets": 10
+  },
+  "full_text_audited_history": {
+    "nll": 0.6036695954493794,
+    "accuracy": 0.7357430167597765,
+    "rows": 89500,
+    "respondents": 8950,
+    "targets": 10
+  },
+  "full_matched_wrong_history": {
+    "nll": 1.2376496468882319,
+    "accuracy": 0.5466592178770949,
+    "rows": 89500,
+    "respondents": 8950,
+    "targets": 10
+  },
+  "full_identity_gap": {
+    "gap_nats": 0.6339800514388527,
+    "ci": [
+      0.6186082413551311,
+      0.6499043680881265
+    ],
+    "respondents": 8950,
+    "draws": 2000,
+    "true_history_better": true
+  }
+}

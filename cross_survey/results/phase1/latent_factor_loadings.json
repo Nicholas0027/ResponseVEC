@@ -1,0 +1,1062 @@
+{
+  "dataset": "ces2020",
+  "source_items": [
+    "CC20_300a",
+    "CC20_302",
+    "CC20_303",
+    "CC20_309e",
+    "CC20_327a",
+    "CC20_327b",
+    "CC20_327c",
+    "CC20_327d",
+    "CC20_327e",
+    "CC20_327f",
+    "CC20_330a",
+    "CC20_330b",
+    "CC20_330c",
+    "CC20_332a",
+    "CC20_332b",
+    "CC20_332c",
+    "CC20_332d",
+    "CC20_332e",
+    "CC20_332f",
+    "CC20_332g",
+    "CC20_333a",
+    "CC20_333b",
+    "CC20_333c",
+    "CC20_333d",
+    "CC20_351a",
+    "CC20_351b",
+    "CC20_356",
+    "CC20_356a",
+    "CC20_361"
+  ],
+  "onehot_features": 104,
+  "factors": [
+    {
+      "factor": 1,
+      "explained_variance_ratio": 0.020402059087493204,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_327b_1.0",
+          "loading": 0.233256885588398
+        },
+        {
+          "feature": "cat__CC20_351a_1.0",
+          "loading": 0.2320803162750218
+        },
+        {
+          "feature": "cat__CC20_332f_2.0",
+          "loading": 0.21989528587997417
+        },
+        {
+          "feature": "cat__CC20_351b_1.0",
+          "loading": 0.20854443491443858
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": 0.188148506601466
+        },
+        {
+          "feature": "cat__CC20_333d_1.0",
+          "loading": 0.18286030565978215
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": 0.18001760239567374
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": 0.17963923878406096
+        },
+        {
+          "feature": "cat__CC20_330b_1.0",
+          "loading": 0.17809755467007646
+        },
+        {
+          "feature": "cat__CC20_330c_2.0",
+          "loading": 0.1737314777806251
+        },
+        {
+          "feature": "cat__CC20_333c_1.0",
+          "loading": 0.17213559658709765
+        },
+        {
+          "feature": "cat__CC20_327a_1.0",
+          "loading": 0.1671044483139181
+        },
+        {
+          "feature": "cat__CC20_332a_1.0",
+          "loading": 0.16312122047669478
+        },
+        {
+          "feature": "cat__CC20_361_6.0",
+          "loading": 0.16282665837482163
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": 0.16248197364071212
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_330b_nan",
+          "loading": 4.337811292440686e-05
+        },
+        {
+          "feature": "cat__CC20_332d_nan",
+          "loading": 5.861103213211092e-05
+        },
+        {
+          "feature": "cat__CC20_333c_nan",
+          "loading": 6.04681323789469e-05
+        },
+        {
+          "feature": "cat__CC20_332a_nan",
+          "loading": 6.192084576470487e-05
+        },
+        {
+          "feature": "cat__CC20_333b_nan",
+          "loading": 6.617306910032787e-05
+        },
+        {
+          "feature": "cat__CC20_309e_nan",
+          "loading": 7.068587670092401e-05
+        },
+        {
+          "feature": "cat__CC20_333d_nan",
+          "loading": 7.59277146261592e-05
+        },
+        {
+          "feature": "cat__CC20_332e_nan",
+          "loading": 7.74593760409739e-05
+        },
+        {
+          "feature": "cat__CC20_333a_nan",
+          "loading": 8.27198709004351e-05
+        },
+        {
+          "feature": "cat__CC20_330c_nan",
+          "loading": 8.462017732251426e-05
+        },
+        {
+          "feature": "cat__CC20_330a_nan",
+          "loading": 8.554620844049979e-05
+        },
+        {
+          "feature": "cat__CC20_332b_nan",
+          "loading": 8.93024570658198e-05
+        },
+        {
+          "feature": "cat__CC20_332c_nan",
+          "loading": 9.531041740645995e-05
+        },
+        {
+          "feature": "cat__CC20_332g_nan",
+          "loading": 9.797913527656953e-05
+        },
+        {
+          "feature": "cat__CC20_332f_nan",
+          "loading": 9.806346545899245e-05
+        }
+      ]
+    },
+    {
+      "factor": 2,
+      "explained_variance_ratio": 0.2694943263563044,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_356_1.0",
+          "loading": 0.22329311165797666
+        },
+        {
+          "feature": "cat__CC20_356a_1.0",
+          "loading": 0.22272633541977233
+        },
+        {
+          "feature": "cat__CC20_327d_1.0",
+          "loading": 0.2112225384361
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": 0.21099606490883085
+        },
+        {
+          "feature": "cat__CC20_333c_2.0",
+          "loading": 0.2098865450197368
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": 0.20406288761477567
+        },
+        {
+          "feature": "cat__CC20_327a_2.0",
+          "loading": 0.203205351360484
+        },
+        {
+          "feature": "cat__CC20_332a_2.0",
+          "loading": 0.19925780012171426
+        },
+        {
+          "feature": "cat__CC20_333a_2.0",
+          "loading": 0.18901587892048652
+        },
+        {
+          "feature": "cat__CC20_333b_2.0",
+          "loading": 0.188525903270136
+        },
+        {
+          "feature": "cat__CC20_332c_1.0",
+          "loading": 0.18475410565164774
+        },
+        {
+          "feature": "cat__CC20_330b_2.0",
+          "loading": 0.18091277917460818
+        },
+        {
+          "feature": "cat__CC20_327e_2.0",
+          "loading": 0.17428638549195236
+        },
+        {
+          "feature": "cat__CC20_330c_1.0",
+          "loading": 0.1723381232649885
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": 0.16206972876616263
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_356a_2.0",
+          "loading": -0.16755300711613888
+        },
+        {
+          "feature": "cat__CC20_356_2.0",
+          "loading": -0.1609532845277979
+        },
+        {
+          "feature": "cat__CC20_327d_2.0",
+          "loading": -0.14698363455550137
+        },
+        {
+          "feature": "cat__CC20_332e_2.0",
+          "loading": -0.14658101917868838
+        },
+        {
+          "feature": "cat__CC20_333c_1.0",
+          "loading": -0.14545303030293238
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": -0.13965030467850903
+        },
+        {
+          "feature": "cat__CC20_327a_1.0",
+          "loading": -0.1387881716107602
+        },
+        {
+          "feature": "cat__CC20_332a_1.0",
+          "loading": -0.13487979781917034
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": -0.12464218166552325
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": -0.12403863548975907
+        },
+        {
+          "feature": "cat__CC20_332c_2.0",
+          "loading": -0.12036437635235112
+        },
+        {
+          "feature": "cat__CC20_330b_1.0",
+          "loading": -0.11644921284130869
+        },
+        {
+          "feature": "cat__CC20_327e_1.0",
+          "loading": -0.10975458082345897
+        },
+        {
+          "feature": "cat__CC20_302_5.0",
+          "loading": -0.109373525628156
+        },
+        {
+          "feature": "cat__CC20_330c_2.0",
+          "loading": -0.10782150784033054
+        }
+      ]
+    },
+    {
+      "factor": 3,
+      "explained_variance_ratio": 0.05027537587595744,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_332b_2.0",
+          "loading": 0.31429690396838267
+        },
+        {
+          "feature": "cat__CC20_332c_2.0",
+          "loading": 0.25103935311549147
+        },
+        {
+          "feature": "cat__CC20_332g_2.0",
+          "loading": 0.1939475597234704
+        },
+        {
+          "feature": "cat__CC20_332e_2.0",
+          "loading": 0.19393842364234887
+        },
+        {
+          "feature": "cat__CC20_332a_1.0",
+          "loading": 0.1786502849524635
+        },
+        {
+          "feature": "cat__CC20_333d_2.0",
+          "loading": 0.1712815650850138
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": 0.17075546595915067
+        },
+        {
+          "feature": "cat__CC20_333a_2.0",
+          "loading": 0.17063200636962067
+        },
+        {
+          "feature": "cat__CC20_333b_2.0",
+          "loading": 0.1697500090023253
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": 0.13294434794914736
+        },
+        {
+          "feature": "cat__CC20_333c_2.0",
+          "loading": 0.13236396481704799
+        },
+        {
+          "feature": "cat__CC20_330b_2.0",
+          "loading": 0.12778847870126542
+        },
+        {
+          "feature": "cat__CC20_351b_2.0",
+          "loading": 0.12308535782091261
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": 0.11281723299857395
+        },
+        {
+          "feature": "cat__CC20_327a_2.0",
+          "loading": 0.10756933154277848
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": -0.30673378469755475
+        },
+        {
+          "feature": "cat__CC20_332c_1.0",
+          "loading": -0.24346401522878508
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": -0.18628465753411497
+        },
+        {
+          "feature": "cat__CC20_332g_1.0",
+          "loading": -0.18620104156356904
+        },
+        {
+          "feature": "cat__CC20_332a_2.0",
+          "loading": -0.1710448769601837
+        },
+        {
+          "feature": "cat__CC20_333d_1.0",
+          "loading": -0.16380158337641168
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": -0.16322079526842764
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": -0.16303131157759038
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": -0.16227814734820442
+        },
+        {
+          "feature": "cat__CC20_327f_2.0",
+          "loading": -0.1254517546865158
+        },
+        {
+          "feature": "cat__CC20_333c_1.0",
+          "loading": -0.1247017384577082
+        },
+        {
+          "feature": "cat__CC20_330b_1.0",
+          "loading": -0.12009185623791734
+        },
+        {
+          "feature": "cat__CC20_351b_1.0",
+          "loading": -0.11439306305726797
+        },
+        {
+          "feature": "cat__CC20_356_3.0",
+          "loading": -0.11097531476220461
+        },
+        {
+          "feature": "cat__CC20_327c_1.0",
+          "loading": -0.1055204617644312
+        }
+      ]
+    },
+    {
+      "factor": 4,
+      "explained_variance_ratio": 0.03868763416464257,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_330a_1.0",
+          "loading": 0.3009531488340243
+        },
+        {
+          "feature": "cat__CC20_327c_1.0",
+          "loading": 0.2907699508633685
+        },
+        {
+          "feature": "cat__CC20_332g_1.0",
+          "loading": 0.2626949658178879
+        },
+        {
+          "feature": "cat__CC20_330c_1.0",
+          "loading": 0.2341637019411287
+        },
+        {
+          "feature": "cat__CC20_300a_nan",
+          "loading": 0.21119201901267476
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": 0.20951153329717317
+        },
+        {
+          "feature": "cat__CC20_330b_2.0",
+          "loading": 0.18658011239955727
+        },
+        {
+          "feature": "cat__CC20_327a_1.0",
+          "loading": 0.16541066486155878
+        },
+        {
+          "feature": "cat__CC20_327d_1.0",
+          "loading": 0.10162543830263815
+        },
+        {
+          "feature": "cat__CC20_332b_2.0",
+          "loading": 0.09606000455246891
+        },
+        {
+          "feature": "cat__CC20_332a_1.0",
+          "loading": 0.09163818472005979
+        },
+        {
+          "feature": "cat__CC20_332c_2.0",
+          "loading": 0.08569327804705867
+        },
+        {
+          "feature": "cat__CC20_361_4.0",
+          "loading": 0.06732630789625145
+        },
+        {
+          "feature": "cat__CC20_332f_1.0",
+          "loading": 0.06397774960597563
+        },
+        {
+          "feature": "cat__CC20_361_5.0",
+          "loading": 0.058550191448965366
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_330a_2.0",
+          "loading": -0.29208787203656134
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": -0.2814119285205325
+        },
+        {
+          "feature": "cat__CC20_332g_2.0",
+          "loading": -0.254023617127072
+        },
+        {
+          "feature": "cat__CC20_330c_2.0",
+          "loading": -0.225275901082335
+        },
+        {
+          "feature": "cat__CC20_327f_2.0",
+          "loading": -0.19979413662856385
+        },
+        {
+          "feature": "cat__CC20_330b_1.0",
+          "loading": -0.17794364051370856
+        },
+        {
+          "feature": "cat__CC20_361_6.0",
+          "loading": -0.16402580515506232
+        },
+        {
+          "feature": "cat__CC20_327a_2.0",
+          "loading": -0.15599683599687048
+        },
+        {
+          "feature": "cat__CC20_300a_3.0",
+          "loading": -0.15481388664262333
+        },
+        {
+          "feature": "cat__CC20_303_3.0",
+          "loading": -0.111514643713022
+        },
+        {
+          "feature": "cat__CC20_327d_2.0",
+          "loading": -0.09223168834747655
+        },
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": -0.08728301344449886
+        },
+        {
+          "feature": "cat__CC20_332a_2.0",
+          "loading": -0.08297346376891926
+        },
+        {
+          "feature": "cat__CC20_332c_1.0",
+          "loading": -0.07703692007130394
+        },
+        {
+          "feature": "cat__CC20_356a_2.0",
+          "loading": -0.0605313019140427
+        }
+      ]
+    },
+    {
+      "factor": 5,
+      "explained_variance_ratio": 0.034773628064779974,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_332g_2.0",
+          "loading": 0.36487971132162395
+        },
+        {
+          "feature": "cat__CC20_327f_2.0",
+          "loading": 0.28469289693297534
+        },
+        {
+          "feature": "cat__CC20_356_3.0",
+          "loading": 0.23728593886300905
+        },
+        {
+          "feature": "cat__CC20_327c_1.0",
+          "loading": 0.2252652187942491
+        },
+        {
+          "feature": "cat__CC20_327e_2.0",
+          "loading": 0.19606460404180154
+        },
+        {
+          "feature": "cat__CC20_300a_nan",
+          "loading": 0.1813623218230357
+        },
+        {
+          "feature": "cat__CC20_356a_3.0",
+          "loading": 0.16544315993355416
+        },
+        {
+          "feature": "cat__CC20_327a_1.0",
+          "loading": 0.14176327992127377
+        },
+        {
+          "feature": "cat__CC20_332e_2.0",
+          "loading": 0.1086184912362639
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": 0.10466483056535064
+        },
+        {
+          "feature": "cat__CC20_351b_1.0",
+          "loading": 0.09642031713608948
+        },
+        {
+          "feature": "cat__CC20_302_4.0",
+          "loading": 0.09554439083239004
+        },
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": 0.07442814013750056
+        },
+        {
+          "feature": "cat__CC20_309e_3.0",
+          "loading": 0.07424970247361763
+        },
+        {
+          "feature": "cat__CC20_330b_2.0",
+          "loading": 0.07201679579638028
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_332g_1.0",
+          "loading": -0.3544854595448261
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": -0.2749043539602464
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": -0.21521676705424111
+        },
+        {
+          "feature": "cat__CC20_327e_1.0",
+          "loading": -0.18599770275497376
+        },
+        {
+          "feature": "cat__CC20_300a_3.0",
+          "loading": -0.15018573157573278
+        },
+        {
+          "feature": "cat__CC20_356_2.0",
+          "loading": -0.14227485638596918
+        },
+        {
+          "feature": "cat__CC20_361_6.0",
+          "loading": -0.14094082490392817
+        },
+        {
+          "feature": "cat__CC20_327a_2.0",
+          "loading": -0.1312315566557279
+        },
+        {
+          "feature": "cat__CC20_309e_2.0",
+          "loading": -0.10507772398172542
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": -0.09844615587350082
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": -0.09439507181395307
+        },
+        {
+          "feature": "cat__CC20_356a_2.0",
+          "loading": -0.09181632791224462
+        },
+        {
+          "feature": "cat__CC20_302_5.0",
+          "loading": -0.08581398168580007
+        },
+        {
+          "feature": "cat__CC20_351b_2.0",
+          "loading": -0.08549008387035248
+        },
+        {
+          "feature": "cat__CC20_356_1.0",
+          "loading": -0.08488156207359425
+        }
+      ]
+    },
+    {
+      "factor": 6,
+      "explained_variance_ratio": 0.03116498377440141,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_332g_1.0",
+          "loading": 0.49635727323861994
+        },
+        {
+          "feature": "cat__CC20_327f_2.0",
+          "loading": 0.33362847622770214
+        },
+        {
+          "feature": "cat__CC20_330a_2.0",
+          "loading": 0.21305214165493042
+        },
+        {
+          "feature": "cat__CC20_332b_2.0",
+          "loading": 0.1281096790059445
+        },
+        {
+          "feature": "cat__CC20_333b_2.0",
+          "loading": 0.12032727122566356
+        },
+        {
+          "feature": "cat__CC20_333d_2.0",
+          "loading": 0.11885993840015525
+        },
+        {
+          "feature": "cat__CC20_333c_2.0",
+          "loading": 0.1184120206635088
+        },
+        {
+          "feature": "cat__CC20_300a_nan",
+          "loading": 0.11453819223586531
+        },
+        {
+          "feature": "cat__CC20_330c_2.0",
+          "loading": 0.10842475133457358
+        },
+        {
+          "feature": "cat__CC20_356_3.0",
+          "loading": 0.10148016151023465
+        },
+        {
+          "feature": "cat__CC20_327e_2.0",
+          "loading": 0.09333429095780525
+        },
+        {
+          "feature": "cat__CC20_303_3.0",
+          "loading": 0.09165277795297481
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": 0.08527425530174712
+        },
+        {
+          "feature": "cat__CC20_332e_2.0",
+          "loading": 0.0847253495224313
+        },
+        {
+          "feature": "cat__CC20_333a_2.0",
+          "loading": 0.08288340499473172
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_332g_2.0",
+          "loading": -0.46762401237011814
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": -0.30545825697580214
+        },
+        {
+          "feature": "cat__CC20_330a_1.0",
+          "loading": -0.18407407282778226
+        },
+        {
+          "feature": "cat__CC20_300a_3.0",
+          "loading": -0.1133400289606036
+        },
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": -0.0993363307565589
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": -0.09154276272914028
+        },
+        {
+          "feature": "cat__CC20_333d_1.0",
+          "loading": -0.0898647876354427
+        },
+        {
+          "feature": "cat__CC20_333c_1.0",
+          "loading": -0.08957287504058446
+        },
+        {
+          "feature": "cat__CC20_330c_1.0",
+          "loading": -0.07969501553402583
+        },
+        {
+          "feature": "cat__CC20_327e_1.0",
+          "loading": -0.06487843757350885
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": -0.05654754814814019
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": -0.05614788490426479
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": -0.053910361111871814
+        },
+        {
+          "feature": "cat__CC20_356_2.0",
+          "loading": -0.05273665689321064
+        },
+        {
+          "feature": "cat__CC20_332c_1.0",
+          "loading": -0.051521190148545074
+        }
+      ]
+    },
+    {
+      "factor": 7,
+      "explained_variance_ratio": 0.02936214312135102,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_330a_2.0",
+          "loading": 0.5086568227124101
+        },
+        {
+          "feature": "cat__CC20_327f_1.0",
+          "loading": 0.29335849134302266
+        },
+        {
+          "feature": "cat__CC20_327c_1.0",
+          "loading": 0.20967137677851758
+        },
+        {
+          "feature": "cat__CC20_332a_2.0",
+          "loading": 0.12170024630343214
+        },
+        {
+          "feature": "cat__CC20_302_5.0",
+          "loading": 0.11625647812508555
+        },
+        {
+          "feature": "cat__CC20_300a_nan",
+          "loading": 0.11153016535783773
+        },
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": 0.10839441888406176
+        },
+        {
+          "feature": "cat__CC20_333b_2.0",
+          "loading": 0.10731369353109242
+        },
+        {
+          "feature": "cat__CC20_333a_2.0",
+          "loading": 0.10434769651595827
+        },
+        {
+          "feature": "cat__CC20_327a_1.0",
+          "loading": 0.08309871429530316
+        },
+        {
+          "feature": "cat__CC20_333d_2.0",
+          "loading": 0.07885932075756917
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": 0.07514514320960453
+        },
+        {
+          "feature": "cat__CC20_333c_2.0",
+          "loading": 0.06644403809447699
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": 0.06550320993383628
+        },
+        {
+          "feature": "cat__CC20_303_2.0",
+          "loading": 0.06449587206304219
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_330a_1.0",
+          "loading": -0.49610253230537305
+        },
+        {
+          "feature": "cat__CC20_327f_2.0",
+          "loading": -0.28033836748820895
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": -0.19646889769434195
+        },
+        {
+          "feature": "cat__CC20_303_3.0",
+          "loading": -0.14909129559152812
+        },
+        {
+          "feature": "cat__CC20_302_4.0",
+          "loading": -0.12714367680078473
+        },
+        {
+          "feature": "cat__CC20_332a_1.0",
+          "loading": -0.10919289606839455
+        },
+        {
+          "feature": "cat__CC20_332b_2.0",
+          "loading": -0.09562231853463565
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": -0.09449374661537514
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": -0.09187950507623875
+        },
+        {
+          "feature": "cat__CC20_300a_3.0",
+          "loading": -0.077467415293501
+        },
+        {
+          "feature": "cat__CC20_327a_2.0",
+          "loading": -0.07026682463526959
+        },
+        {
+          "feature": "cat__CC20_361_6.0",
+          "loading": -0.07009253249415351
+        },
+        {
+          "feature": "cat__CC20_333d_1.0",
+          "loading": -0.06630311460932682
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": -0.06238907340541923
+        },
+        {
+          "feature": "cat__CC20_309e_3.0",
+          "loading": -0.060460351686219486
+        }
+      ]
+    },
+    {
+      "factor": 8,
+      "explained_variance_ratio": 0.027752418424086694,
+      "top_positive": [
+        {
+          "feature": "cat__CC20_332b_2.0",
+          "loading": 0.32776748150677876
+        },
+        {
+          "feature": "cat__CC20_300a_nan",
+          "loading": 0.2996151108018247
+        },
+        {
+          "feature": "cat__CC20_309e_2.0",
+          "loading": 0.23435494960016415
+        },
+        {
+          "feature": "cat__CC20_327e_2.0",
+          "loading": 0.21800267490734598
+        },
+        {
+          "feature": "cat__CC20_333d_1.0",
+          "loading": 0.20110510706256796
+        },
+        {
+          "feature": "cat__CC20_332f_1.0",
+          "loading": 0.17328314254593807
+        },
+        {
+          "feature": "cat__CC20_332d_1.0",
+          "loading": 0.15281640414274167
+        },
+        {
+          "feature": "cat__CC20_333b_1.0",
+          "loading": 0.14660257786646233
+        },
+        {
+          "feature": "cat__CC20_332e_1.0",
+          "loading": 0.1133348969801684
+        },
+        {
+          "feature": "cat__CC20_327c_2.0",
+          "loading": 0.11293743186837046
+        },
+        {
+          "feature": "cat__CC20_333a_1.0",
+          "loading": 0.1001467384108792
+        },
+        {
+          "feature": "cat__CC20_330a_2.0",
+          "loading": 0.09904460507351887
+        },
+        {
+          "feature": "cat__CC20_330c_2.0",
+          "loading": 0.09786891367590728
+        },
+        {
+          "feature": "cat__CC20_333c_1.0",
+          "loading": 0.09625551412699729
+        },
+        {
+          "feature": "cat__CC20_332g_2.0",
+          "loading": 0.08656731134223458
+        }
+      ],
+      "top_negative": [
+        {
+          "feature": "cat__CC20_332b_1.0",
+          "loading": -0.3260515356705435
+        },
+        {
+          "feature": "cat__CC20_327e_1.0",
+          "loading": -0.21515539598425024
+        },
+        {
+          "feature": "cat__CC20_309e_3.0",
+          "loading": -0.2103318512530207
+        },
+        {
+          "feature": "cat__CC20_333d_2.0",
+          "loading": -0.1990967971347354
+        },
+        {
+          "feature": "cat__CC20_300a_3.0",
+          "loading": -0.19906366700151326
+        },
+        {
+          "feature": "cat__CC20_361_6.0",
+          "loading": -0.1815819644331086
+        },
+        {
+          "feature": "cat__CC20_332f_2.0",
+          "loading": -0.17132149479677164
+        },
+        {
+          "feature": "cat__CC20_332d_2.0",
+          "loading": -0.1509290410387493
+        },
+        {
+          "feature": "cat__CC20_333b_2.0",
+          "loading": -0.1443641029720858
+        },
+        {
+          "feature": "cat__CC20_332e_2.0",
+          "loading": -0.11153164284731465
+        },
+        {
+          "feature": "cat__CC20_327c_1.0",
+          "loading": -0.11118297160539121
+        },
+        {
+          "feature": "cat__CC20_333a_2.0",
+          "loading": -0.0979780765384546
+        },
+        {
+          "feature": "cat__CC20_330a_1.0",
+          "loading": -0.0971171432218588
+        },
+        {
+          "feature": "cat__CC20_330c_1.0",
+          "loading": -0.09572928818123351
+        },
+        {
+          "feature": "cat__CC20_333c_2.0",
+          "loading": -0.09428034060444224
+        }
+      ]
+    }
+  ],
+  "warning": "SVD signs are arbitrary and factors are not psychometrically identified."
+}

@@ -1,0 +1,59 @@
+{
+  "dataset": "ces2020",
+  "phase": "coverage_ablation",
+  "post_freeze": true,
+  "created_after_phase1": true,
+  "selection_basis": "manual wording, branching, dynamic-text, and construct validity only; no per-target model performance was inspected",
+  "seed": 1701,
+  "target_items": [
+    "CC20_433a",
+    "CC20_420_6",
+    "CC20_443_4",
+    "CC20_442d",
+    "CC20_440a",
+    "CC20_441a",
+    "CC20_431a",
+    "CC20_432a",
+    "CC20_401",
+    "CC20_410"
+  ],
+  "target_constructs": {
+    "CC20_433a": "party identification",
+    "CC20_420_6": "foreign policy / multilateral military action",
+    "CC20_443_4": "state spending / law enforcement",
+    "CC20_442d": "immigration and asylum policy",
+    "CC20_440a": "racial privilege attitudes",
+    "CC20_441a": "racial resentment",
+    "CC20_431a": "campaign contact / political mobilization",
+    "CC20_432a": "political participation / candidacy",
+    "CC20_401": "turnout behavior",
+    "CC20_410": "presidential vote choice"
+  },
+  "target_text": {
+    "CC20_433a": "Generally speaking, do you think of yourself as a Democrat, Republican, Independent, or Other?",
+    "CC20_420_6": "Would you approve of the use of U.S. military troops to help the United Nations uphold international law?",
+    "CC20_443_4": "How should your state legislature spend money on law enforcement: greatly increase, slightly increase, maintain, slightly decrease, or greatly decrease?",
+    "CC20_442d": "Do you support or oppose suspending a program that allows migrants to remain in the United States while their asylum cases are being decided?",
+    "CC20_440a": "White people in the United States have certain advantages because of the color of their skin. Strongly agree to strongly disagree.",
+    "CC20_441a": "Irish, Italians, Jewish and many other minorities overcame prejudice and worked their way up. Blacks should do the same without special favors. Strongly agree to strongly disagree.",
+    "CC20_431a": "Did a candidate or political campaign organization contact you during the 2020 election?",
+    "CC20_432a": "Have you ever run for elective office at any level of government?",
+    "CC20_401": "Which statement best describes whether you voted in the November 2020 general election?",
+    "CC20_410": "For whom did you vote for President of the United States in 2020?"
+  },
+  "phase1_exclusions": {
+    "CC20_416a": "dynamic respondent-specific candidate name and district-dependent text; no fixed target semantics",
+    "CC20_430a_8": "implicit multi-select punch with ambiguous item-level wording in the PDF; likely none-of-the-above behavior"
+  },
+  "source_text_pool_rule": "eligible source items with item_specific_text=true; parent-fallback punches excluded so every selector sees an auditable item-specific text",
+  "k_grid": [5, 10, 20],
+  "selectors": [
+    "random",
+    "family_balanced",
+    "tfidf_target_aware",
+    "bge_target_aware",
+    "supervised_mi_oracle"
+  ],
+  "history_seeds": [1701, 1702, 1703],
+  "warning": "This phase was designed after inspecting the preliminary Phase 1 K curve and is exploratory. ANES remains untouched as the locked replication."
+}

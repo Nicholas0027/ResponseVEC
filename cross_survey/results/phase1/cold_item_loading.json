@@ -1,0 +1,462 @@
+{
+  "dataset": "ces2020",
+  "phase": "cold_item_loading",
+  "post_freeze": true,
+  "exploratory": true,
+  "respondent_dimensions": 2,
+  "respondent_source_items": [
+    "CC20_300a",
+    "CC20_302",
+    "CC20_303",
+    "CC20_309e",
+    "CC20_327a",
+    "CC20_327b",
+    "CC20_327c",
+    "CC20_327d",
+    "CC20_327e",
+    "CC20_327f",
+    "CC20_330a",
+    "CC20_330b",
+    "CC20_330c",
+    "CC20_332a",
+    "CC20_332b",
+    "CC20_332c",
+    "CC20_332d",
+    "CC20_332e",
+    "CC20_332f",
+    "CC20_332g",
+    "CC20_333a",
+    "CC20_333b",
+    "CC20_333c",
+    "CC20_333d",
+    "CC20_351a",
+    "CC20_351b",
+    "CC20_356",
+    "CC20_356a",
+    "CC20_361"
+  ],
+  "loading_bank_source_items": [
+    "CC20_307",
+    "CC20_331a",
+    "CC20_331b",
+    "CC20_331c",
+    "CC20_334a",
+    "CC20_334c",
+    "CC20_334d",
+    "CC20_334e",
+    "CC20_334f",
+    "CC20_334g",
+    "CC20_334h",
+    "CC20_355a",
+    "CC20_355b",
+    "CC20_355c",
+    "CC20_355d",
+    "CC20_355e",
+    "CC20_363"
+  ],
+  "target_items": [
+    "CC20_401",
+    "CC20_403",
+    "CC20_410",
+    "CC20_431a",
+    "CC20_433a",
+    "CC20_440a",
+    "CC20_440b",
+    "CC20_440c",
+    "CC20_440d",
+    "CC20_441a",
+    "CC20_441b",
+    "CC20_442a",
+    "CC20_442b",
+    "CC20_442c",
+    "CC20_442d",
+    "CC20_442e",
+    "CC20_443_1",
+    "CC20_443_2",
+    "CC20_443_3",
+    "CC20_443_4",
+    "CC20_443_5"
+  ],
+  "item_folds": {
+    "CC20_410": 0,
+    "CC20_440": 1,
+    "CC20_441": 2,
+    "CC20_443": 3,
+    "CC20_401": 4,
+    "CC20_433": 0,
+    "CC20_403": 1,
+    "CC20_442": 2,
+    "CC20_431": 3
+  },
+  "split_counts": {
+    "train": 30912,
+    "test": 10190
+  },
+  "summary": [
+    {
+      "method": "bge",
+      "nll": 1.3301100355607443,
+      "accuracy": 0.3526563167639937,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "bge_oracle_intercept",
+      "nll": 1.1734110346712008,
+      "accuracy": 0.4454873474813654,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "population_oracle",
+      "nll": 1.1742537894547678,
+      "accuracy": 0.4402696671889095,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "position",
+      "nll": 1.4249678240324497,
+      "accuracy": 0.26482932155913214,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "position_oracle_intercept",
+      "nll": 1.1822904947419812,
+      "accuracy": 0.4468024497934767,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "tfidf",
+      "nll": 1.2904559248366165,
+      "accuracy": 0.33782462137397334,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "tfidf_oracle_intercept",
+      "nll": 1.161276199423638,
+      "accuracy": 0.47002326354270524,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "uniform",
+      "nll": 1.330988898247697,
+      "accuracy": 0.3223282533352324,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "warm_oracle",
+      "nll": 0.9665742765532921,
+      "accuracy": 0.5867730142904619,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    }
+  ],
+  "comparisons": {
+    "tfidf_vs_position": {
+      "respondent": {
+        "left_minus_right_nll": -0.13451189919583303,
+        "nll_ci": [
+          -0.1351960882740706,
+          -0.13112727914434724
+        ],
+        "left_minus_right_accuracy": 0.0729952998148412,
+        "accuracy_ci": [
+          0.07011656593365585,
+          0.07470178968450242
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.13451189919583303,
+        "nll_ci": [
+          -0.29162625969552647,
+          -0.039776934826358044
+        ],
+        "left_minus_right_accuracy": 0.0729952998148412,
+        "accuracy_ci": [
+          -0.018125153310850975,
+          0.18610048179909075
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "bge_vs_position": {
+      "respondent": {
+        "left_minus_right_nll": -0.09485778847170558,
+        "nll_ci": [
+          -0.09623145164013766,
+          -0.09278634015529709
+        ],
+        "left_minus_right_accuracy": 0.0878269952048616,
+        "accuracy_ci": [
+          0.08510732946226197,
+          0.08887976413943643
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.09485778847170558,
+        "nll_ci": [
+          -0.17595578053163433,
+          -0.03741499007728447
+        ],
+        "left_minus_right_accuracy": 0.0878269952048616,
+        "accuracy_ci": [
+          0.009834692278889352,
+          0.19035837069140277
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "bge_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": 0.03965411072412748,
+        "nll_ci": [
+          0.037701225117528374,
+          0.03958105583283986
+        ],
+        "left_minus_right_accuracy": 0.014831695390020414,
+        "accuracy_ci": [
+          0.01298503035065634,
+          0.01614828036972952
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": 0.03965411072412748,
+        "nll_ci": [
+          -0.0002461628904304574,
+          0.11593326308066079
+        ],
+        "left_minus_right_accuracy": 0.014831695390020414,
+        "accuracy_ci": [
+          -0.05887825055909611,
+          0.09050761399749607
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "warm_oracle_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.32388164828332455,
+        "nll_ci": [
+          -0.3259845453099068,
+          -0.31317780789422817
+        ],
+        "left_minus_right_accuracy": 0.24894839291648863,
+        "accuracy_ci": [
+          0.2435667633076778,
+          0.2507455012581879
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.32388164828332455,
+        "nll_ci": [
+          -0.4605915255024517,
+          -0.23078199729762433
+        ],
+        "left_minus_right_accuracy": 0.24894839291648863,
+        "accuracy_ci": [
+          0.1714780916754031,
+          0.34237398781686723
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "position_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": 0.008036705287213628,
+        "nll_ci": [
+          0.007053413636392926,
+          0.008923347968505515
+        ],
+        "left_minus_right_accuracy": 0.00653278260456725,
+        "accuracy_ci": [
+          0.005282778159126175,
+          0.007938379550337792
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": 0.008036705287213628,
+        "nll_ci": [
+          -0.018219149046072584,
+          0.03424370972004581
+        ],
+        "left_minus_right_accuracy": 0.00653278260456725,
+        "accuracy_ci": [
+          -0.02429649897267348,
+          0.03663144448135222
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "tfidf_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": -0.0129775900311296,
+        "nll_ci": [
+          -0.01324732942201061,
+          -0.012533879993299848
+        ],
+        "left_minus_right_accuracy": 0.029753596353795757,
+        "accuracy_ci": [
+          0.02832593809630115,
+          0.030657274153484616
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.0129775900311296,
+        "nll_ci": [
+          -0.020950641645597696,
+          -0.005050950473482361
+        ],
+        "left_minus_right_accuracy": 0.029753596353795757,
+        "accuracy_ci": [
+          0.006021927671412207,
+          0.0596040166052758
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "bge_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": -0.0008427547835670049,
+        "nll_ci": [
+          -0.0008788423966834178,
+          -0.0007980585184676481
+        ],
+        "left_minus_right_accuracy": 0.005217680292455965,
+        "accuracy_ci": [
+          0.0047501675859298416,
+          0.005667090006508756
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "item": {
+        "left_minus_right_nll": -0.0008427547835670049,
+        "nll_ci": [
+          -0.0016454821388189836,
+          -3.5358151525189066e-05
+        ],
+        "left_minus_right_accuracy": 0.005217680292455965,
+        "accuracy_ci": [
+          0.0,
+          0.015419367511294442
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "test_families": [
+        "CC20_410",
+        "CC20_433"
+      ],
+      "train_option_rows": 116,
+      "test_option_rows": 10,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 1.0,
+        "bge": 1.0
+      }
+    },
+    {
+      "fold": 1,
+      "test_families": [
+        "CC20_403",
+        "CC20_440"
+      ],
+      "train_option_rows": 102,
+      "test_option_rows": 24,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 0.1,
+        "bge": 1.0
+      }
+    },
+    {
+      "fold": 2,
+      "test_families": [
+        "CC20_441",
+        "CC20_442"
+      ],
+      "train_option_rows": 106,
+      "test_option_rows": 20,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 1.0,
+        "bge": 0.1
+      }
+    },
+    {
+      "fold": 3,
+      "test_families": [
+        "CC20_431",
+        "CC20_443"
+      ],
+      "train_option_rows": 99,
+      "test_option_rows": 27,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 0.1,
+        "bge": 1.0
+      }
+    },
+    {
+      "fold": 4,
+      "test_families": [
+        "CC20_401"
+      ],
+      "train_option_rows": 121,
+      "test_option_rows": 5,
+      "alphas": {
+        "position": 1.0,
+        "tfidf": 0.1,
+        "bge": 1.0
+      }
+    }
+  ],
+  "caveat": "Preliminary text proxies and only nine target families; item-clustered inference is low-power."
+}

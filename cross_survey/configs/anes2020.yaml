@@ -1,0 +1,10 @@
+dataset: anes2020
+title: ANES 2020 Time Series Study Full Release
+source_page: https://electionstudies.org/data-center/2020-time-series-study/
+doi: 10.3886/ICPSR38034.v1
+seed: 1701
+primary: false
+locked_replication: true
+notes:
+  - 8280 pre-election interviews and 7449 post-election re-interviews.
+  - Target selection is locked after CES protocol freeze.

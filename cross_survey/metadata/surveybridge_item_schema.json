@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SurveyBridge structured survey item",
+  "type": "object",
+  "required": [
+    "item_id",
+    "item_type",
+    "domains",
+    "constructs",
+    "scale_type",
+    "options",
+    "global_uncertainty"
+  ],
+  "properties": {
+    "item_id": {"type": "string"},
+    "item_type": {
+      "enum": ["attitude", "behavior", "factual_knowledge", "perception", "identity", "demographic", "other"]
+    },
+    "domains": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "constructs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "relevance"],
+        "properties": {
+          "name": {"type": "string"},
+          "relevance": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      },
+      "minItems": 1,
+      "maxItems": 4
+    },
+    "scale_type": {
+      "enum": ["binary", "ordinal", "nominal", "multi_select_binary", "numeric", "other"]
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "label",
+          "stance_direction",
+          "behavior_intensity",
+          "is_neutral",
+          "uncertainty"
+        ],
+        "properties": {
+          "code": {"type": "integer"},
+          "label": {"type": "string"},
+          "stance_direction": {"type": "number", "minimum": -1, "maximum": 1},
+          "behavior_intensity": {"type": "number", "minimum": -1, "maximum": 1},
+          "is_neutral": {"type": "boolean"},
+          "uncertainty": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      },
+      "minItems": 2
+    },
+    "global_uncertainty": {"type": "number", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": false
+}

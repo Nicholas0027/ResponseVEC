@@ -1,0 +1,47 @@
+{
+  "dataset": "ces2020",
+  "input": "cross_survey/data/raw/ces2020/CES20_Common_OUTPUT_vv.csv",
+  "input_sha256": "946afde863a1c1319bb2931bbd24650961aedae27f36e6447ecdc7db68f83c4c",
+  "rows": 61000,
+  "unique_respondents": 61000,
+  "paired_pre_post_respondents": 51551,
+  "source_candidates": 162,
+  "target_candidates": 94,
+  "eligible_source_items": 139,
+  "eligible_target_items": 46,
+  "respondents_with_20_source_10_target": 51551,
+  "source_nonmissing_quantiles": {
+    "0.0": 113.0,
+    "0.05": 128.0,
+    "0.25": 131.0,
+    "0.5": 135.0,
+    "0.75": 136.0,
+    "0.95": 137.0,
+    "1.0": 139.0
+  },
+  "target_nonmissing_quantiles": {
+    "0.0": 34.0,
+    "0.05": 36.0,
+    "0.25": 42.0,
+    "0.5": 46.0,
+    "0.75": 46.0,
+    "0.95": 46.0,
+    "1.0": 46.0
+  },
+  "eligibility_rule": {
+    "minimum_nonmissing": 2000,
+    "minimum_paired_coverage": 0.5,
+    "minimum_categories": 2,
+    "maximum_categories": 11
+  },
+  "C0_data_viability": true,
+  "excluded_columns": {
+    "pattern": [],
+    "nonnumeric": []
+  },
+  "notes": [
+    "Candidate declaration uses names and coverage only; no target labels or model results.",
+    "Question wording and response labels must be joined from the questionnaires before modelling.",
+    "Repeated pre/post items and branching/randomization are not yet removed."
+  ]
+}

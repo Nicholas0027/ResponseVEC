@@ -1,0 +1,10 @@
+dataset: ces2020
+title: Cooperative Election Study Common Content, 2020
+doi: 10.7910/DVN/E9N6PH
+dataverse_api: https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/E9N6PH
+seed: 1701
+primary: true
+notes:
+  - Public release; pre/post election waves for the same respondents.
+  - Use common content only for the primary experiment.
+  - Raw files are fingerprinted and never committed.
