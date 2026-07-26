@@ -46,11 +46,14 @@ def main():
     parser.add_argument("--max-input-length", type=int, default=4096)
     parser.add_argument("--max-new-tokens", type=int, default=640)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--quantization", default="auto",
+                        choices=["auto", "nf4", "none"],
+                        help="auto detects AWQ/GPTQ from config; nf4 forces on-the-fly bnb 4-bit")
     args = parser.parse_args()
 
     import torch
     from jsonschema import validate
-    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+    from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
     prompts = [json.loads(line) for line in Path(args.prompts).read_text().splitlines()
                if line.strip()]
@@ -65,20 +68,33 @@ def main():
     if not pending:
         return
 
-    quantization = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_use_double_quant=True,
-        bnb_4bit_compute_dtype=torch.bfloat16,
-    )
-    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model,
+    use_nf4 = args.quantization == "nf4"
+    if args.quantization == "auto":
+        try:
+            cfg = AutoConfig.from_pretrained(args.model, trust_remote_code=True)
+            qcfg = getattr(cfg, "quantization_config", None)
+            if qcfg and qcfg.get("quant_method", "") in ("awq", "gptq", "fp8"):
+                use_nf4 = False
+                print(f"detected pre-quantized model ({qcfg['quant_method']}), skipping bnb NF4")
+            else:
+                use_nf4 = True
+        except Exception:
+            use_nf4 = True
+
+    load_kwargs = dict(
         device_map="auto",
-        quantization_config=quantization,
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
     )
+    if use_nf4:
+        load_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+        )
+    tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(args.model, **load_kwargs)
     model.eval()
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -122,6 +138,7 @@ def main():
                 }
                 try:
                     data = extract_json(raw)
+                    data.pop("$schema", None)
                     validate(instance=data, schema=schema)
                     if data["item_id"] != record["item"]:
                         raise ValueError("item_id does not match prompt")

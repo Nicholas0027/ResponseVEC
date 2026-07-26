@@ -1,0 +1,556 @@
+{
+  "dataset": "ces2020",
+  "phase": "structured_loading",
+  "post_freeze": true,
+  "exploratory": true,
+  "model": "Qwen3-32B-AWQ",
+  "structured_records_loaded": 128,
+  "structured_items_covered": 64,
+  "domain_vocab_size": 166,
+  "construct_vocab_size": 328,
+  "feature_dim": 512,
+  "missing_option_features": 0,
+  "respondent_dimensions": 2,
+  "respondent_source_items": [
+    "CC20_300a",
+    "CC20_302",
+    "CC20_303",
+    "CC20_309e",
+    "CC20_327a",
+    "CC20_327b",
+    "CC20_327c",
+    "CC20_327d",
+    "CC20_327e",
+    "CC20_327f",
+    "CC20_330a",
+    "CC20_330b",
+    "CC20_330c",
+    "CC20_332a",
+    "CC20_332b",
+    "CC20_332c",
+    "CC20_332d",
+    "CC20_332e",
+    "CC20_332f",
+    "CC20_332g",
+    "CC20_333a",
+    "CC20_333b",
+    "CC20_333c",
+    "CC20_333d",
+    "CC20_351a",
+    "CC20_351b",
+    "CC20_356",
+    "CC20_356a",
+    "CC20_361"
+  ],
+  "loading_bank_source_items": [
+    "CC20_307",
+    "CC20_331a",
+    "CC20_331b",
+    "CC20_331c",
+    "CC20_334a",
+    "CC20_334c",
+    "CC20_334d",
+    "CC20_334e",
+    "CC20_334f",
+    "CC20_334g",
+    "CC20_334h",
+    "CC20_355a",
+    "CC20_355b",
+    "CC20_355c",
+    "CC20_355d",
+    "CC20_355e",
+    "CC20_363"
+  ],
+  "target_items": [
+    "CC20_401",
+    "CC20_403",
+    "CC20_410",
+    "CC20_431a",
+    "CC20_433a",
+    "CC20_440a",
+    "CC20_440b",
+    "CC20_440c",
+    "CC20_440d",
+    "CC20_441a",
+    "CC20_441b",
+    "CC20_442a",
+    "CC20_442b",
+    "CC20_442c",
+    "CC20_442d",
+    "CC20_442e",
+    "CC20_443_1",
+    "CC20_443_2",
+    "CC20_443_3",
+    "CC20_443_4",
+    "CC20_443_5"
+  ],
+  "item_folds": {
+    "CC20_410": 0,
+    "CC20_440": 1,
+    "CC20_441": 2,
+    "CC20_443": 3,
+    "CC20_401": 4,
+    "CC20_433": 0,
+    "CC20_403": 1,
+    "CC20_442": 2,
+    "CC20_431": 3
+  },
+  "split_counts": {
+    "train": 30912,
+    "test": 10190
+  },
+  "summary": [
+    {
+      "method": "population_oracle",
+      "nll": 1.1742537894547678,
+      "accuracy": 0.4402696671889095,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "position",
+      "nll": 1.4249678240324497,
+      "accuracy": 0.26482932155913214,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "position_oracle_intercept",
+      "nll": 1.1822904947419812,
+      "accuracy": 0.4468024497934767,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "structured_llm",
+      "nll": 1.4219746404244853,
+      "accuracy": 0.3592128376774439,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "structured_llm_oracle_intercept",
+      "nll": 1.256754282306514,
+      "accuracy": 0.4179936381332194,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "structured_llm_v2",
+      "nll": 1.4393567914063667,
+      "accuracy": 0.3524711579547073,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "structured_llm_v2_oracle_intercept",
+      "nll": 1.2206911195484464,
+      "accuracy": 0.4252907942838152,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "tfidf",
+      "nll": 1.2904559248366165,
+      "accuracy": 0.33782462137397334,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "tfidf_oracle_intercept",
+      "nll": 1.161276199423638,
+      "accuracy": 0.47002326354270524,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "uniform",
+      "nll": 1.330988898247697,
+      "accuracy": 0.3223282533352324,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    },
+    {
+      "method": "warm_oracle",
+      "nll": 0.9665742765532921,
+      "accuracy": 0.5867730142904619,
+      "rows": 210630,
+      "respondents": 10190,
+      "items": 21,
+      "families": 9
+    }
+  ],
+  "comparisons": {
+    "structured_llm_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": 0.13151871558786865,
+        "nll_ci": [
+          0.12766030392488267,
+          0.13531866383668634
+        ],
+        "left_minus_right_accuracy": 0.021388216303470542,
+        "accuracy_ci": [
+          0.018381285227211948,
+          0.024504690413448497
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": 0.13151871558786865,
+        "nll_ci": [
+          -0.03499731603054743,
+          0.2951240318932354
+        ],
+        "left_minus_right_accuracy": 0.021388216303470542,
+        "accuracy_ci": [
+          -0.05851437855550442,
+          0.10730719620030249
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "structured_llm_vs_position": {
+      "respondent": {
+        "left_minus_right_nll": -0.0029931836079644543,
+        "nll_ci": [
+          -0.006713075750430161,
+          0.0006166481969305684
+        ],
+        "left_minus_right_accuracy": 0.09438351611831174,
+        "accuracy_ci": [
+          0.09122568491465999,
+          0.09757819088568091
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": -0.0029931836079644543,
+        "nll_ci": [
+          -0.2469831728666264,
+          0.19432376750302172
+        ],
+        "left_minus_right_accuracy": 0.09438351611831174,
+        "accuracy_ci": [
+          0.00030372179594495596,
+          0.20216591597290554
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "structured_llm_v2_vs_structured_llm": {
+      "respondent": {
+        "left_minus_right_nll": 0.017382150981881554,
+        "nll_ci": [
+          0.01335447648590781,
+          0.021419504314992226
+        ],
+        "left_minus_right_accuracy": -0.0067416797227365525,
+        "accuracy_ci": [
+          -0.009723052080884498,
+          -0.0038304277984981
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": 0.017382150981881554,
+        "nll_ci": [
+          -0.11840777115523894,
+          0.15851817911896232
+        ],
+        "left_minus_right_accuracy": -0.0067416797227365525,
+        "accuracy_ci": [
+          -0.06572851539521464,
+          0.04877934237972235
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "tfidf_vs_position": {
+      "respondent": {
+        "left_minus_right_nll": -0.1345118991958331,
+        "nll_ci": [
+          -0.13651976240326816,
+          -0.13253839162954803
+        ],
+        "left_minus_right_accuracy": 0.0729952998148412,
+        "accuracy_ci": [
+          0.07070458912572997,
+          0.07529158322139352
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": -0.1345118991958331,
+        "nll_ci": [
+          -0.2837241873061657,
+          -0.04138667402687855
+        ],
+        "left_minus_right_accuracy": 0.0729952998148412,
+        "accuracy_ci": [
+          -0.01497018595670249,
+          0.18058162223637594
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "warm_oracle_vs_structured_llm": {
+      "respondent": {
+        "left_minus_right_nll": -0.4554003638711932,
+        "nll_ci": [
+          -0.462325916074726,
+          -0.44840078343544276
+        ],
+        "left_minus_right_accuracy": 0.22756017661301808,
+        "accuracy_ci": [
+          0.2239709287344364,
+          0.23115930615262978
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": -0.4554003638711932,
+        "nll_ci": [
+          -0.5641310067090414,
+          -0.3488420963759649
+        ],
+        "left_minus_right_accuracy": 0.22756017661301808,
+        "accuracy_ci": [
+          0.15603776073247444,
+          0.302978960834502
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "warm_oracle_vs_tfidf": {
+      "respondent": {
+        "left_minus_right_nll": -0.32388164828332455,
+        "nll_ci": [
+          -0.3302656557702559,
+          -0.3175717421433305
+        ],
+        "left_minus_right_accuracy": 0.24894839291648863,
+        "accuracy_ci": [
+          0.2453766777871392,
+          0.25248223498857425
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": -0.32388164828332455,
+        "nll_ci": [
+          -0.44613637686334373,
+          -0.22983895114419162
+        ],
+        "left_minus_right_accuracy": 0.24894839291648863,
+        "accuracy_ci": [
+          0.17224737538087503,
+          0.33639354946605193
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "structured_llm_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": 0.08250049285174625,
+        "nll_ci": [
+          0.08051803232006552,
+          0.08453324114762706
+        ],
+        "left_minus_right_accuracy": -0.022276029055690073,
+        "accuracy_ci": [
+          -0.02388743381382656,
+          -0.020654193645426182
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": 0.08250049285174625,
+        "nll_ci": [
+          0.005871362719185719,
+          0.16285731826924152
+        ],
+        "left_minus_right_accuracy": -0.022276029055690073,
+        "accuracy_ci": [
+          -0.06471057203375205,
+          0.01591142864641018
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "tfidf_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": -0.012977590031129638,
+        "nll_ci": [
+          -0.013334744672965422,
+          -0.012621564287562764
+        ],
+        "left_minus_right_accuracy": 0.029753596353795757,
+        "accuracy_ci": [
+          0.028576798548265767,
+          0.030911700795727165
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": -0.012977590031129638,
+        "nll_ci": [
+          -0.021101865884969866,
+          -0.0050065343565859795
+        ],
+        "left_minus_right_accuracy": 0.029753596353795757,
+        "accuracy_ci": [
+          0.006162082481249265,
+          0.0606391467150615
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    },
+    "position_oracle_intercept_vs_population_oracle": {
+      "respondent": {
+        "left_minus_right_nll": 0.008036705287213628,
+        "nll_ci": [
+          0.007097230016039383,
+          0.008970125098507663
+        ],
+        "left_minus_right_accuracy": 0.00653278260456725,
+        "accuracy_ci": [
+          0.005218631380841715,
+          0.007867035334785624
+        ],
+        "clusters": 10190,
+        "unit": "respondent"
+      },
+      "family": {
+        "left_minus_right_nll": 0.008036705287213628,
+        "nll_ci": [
+          -0.018469196795404843,
+          0.03430114258197036
+        ],
+        "left_minus_right_accuracy": 0.00653278260456725,
+        "accuracy_ci": [
+          -0.024641301590480353,
+          0.03694967787978093
+        ],
+        "clusters": 21,
+        "unit": "item"
+      }
+    }
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "test_families": [
+        "CC20_410",
+        "CC20_433"
+      ],
+      "train_option_rows": 116,
+      "test_option_rows": 10,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 1.0,
+        "structured_llm": 0.01,
+        "structured_llm_v2": 0.1
+      }
+    },
+    {
+      "fold": 1,
+      "test_families": [
+        "CC20_403",
+        "CC20_440"
+      ],
+      "train_option_rows": 102,
+      "test_option_rows": 24,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 0.1,
+        "structured_llm": 0.1,
+        "structured_llm_v2": 10.0
+      }
+    },
+    {
+      "fold": 2,
+      "test_families": [
+        "CC20_441",
+        "CC20_442"
+      ],
+      "train_option_rows": 106,
+      "test_option_rows": 20,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 1.0,
+        "structured_llm": 0.1,
+        "structured_llm_v2": 10.0
+      }
+    },
+    {
+      "fold": 3,
+      "test_families": [
+        "CC20_431",
+        "CC20_443"
+      ],
+      "train_option_rows": 99,
+      "test_option_rows": 27,
+      "alphas": {
+        "position": 10.0,
+        "tfidf": 0.1,
+        "structured_llm": 0.1,
+        "structured_llm_v2": 10.0
+      }
+    },
+    {
+      "fold": 4,
+      "test_families": [
+        "CC20_401"
+      ],
+      "train_option_rows": 121,
+      "test_option_rows": 5,
+      "alphas": {
+        "position": 1.0,
+        "tfidf": 0.1,
+        "structured_llm": 0.1,
+        "structured_llm_v2": 10.0
+      }
+    }
+  ],
+  "tfidf_headroom_reference": {
+    "tfidf_nll_recovery_pct": 88.87452982738951,
+    "structured_nll_recovery_pct": 124.96383613210797
+  },
+  "caveat": "Preliminary structured LLM features; only nine target families; family-clustered inference is low-power."
+}

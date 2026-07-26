@@ -1,0 +1,16 @@
+{
+  "records": 128,
+  "valid_records": 128,
+  "valid_rate": 1.0,
+  "paired_items": 64,
+  "item_type_agreement": 1.0,
+  "scale_type_agreement": 0.984375,
+  "option_stance_spearman": 0.620534750454539,
+  "option_intensity_spearman": 0.6329030687836656,
+  "gate_thresholds": {
+    "valid_rate": 0.9,
+    "stance_spearman": 0.5
+  },
+  "stable_enough_to_calibrate": true,
+  "error_counts": {}
+}
