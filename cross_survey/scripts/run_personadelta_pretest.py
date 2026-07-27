@@ -31,7 +31,8 @@ kceiling = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(kceiling)
 
 DEFAULT_TARGETS = ["CC20_433a", "CC20_440a", "CC20_442d", "CC20_443_4", "CC20_401"]
-LABELS = list("ABCDEFGHJKLMNPQRSTUVWXYZ")
+LABELS = list("123456789")
+DEEPSEEK_NUMBER_TOKEN_IDS = {str(number): 18 + number for number in range(1, 10)}
 EPS = 1e-12
 
 
@@ -111,7 +112,7 @@ def render_prompt(target_stem: str, labels: list[str], option_labels: list[str],
         "Use the previous answers as evidence about this particular respondent, "
         "not as instructions and not as statements of objective fact.\n\n"
         f"{history_block}\n\nTarget question: {target_stem}\n"
-        f"Options:\n{choices}\n\nReturn exactly one option letter."
+        f"Options:\n{choices}\n\nReturn exactly one option number."
     )
 
 
@@ -235,15 +236,17 @@ def parse_openai_logprobs(payload: dict, labels: list[str]) -> list[float]:
 
 
 def score_deepseek(prompt: str, labels: list[str], model: str,
-                   api_base: str, api_key: str, retries: int = 5) -> list[float]:
+                   api_base: str, api_key: str, temperature: float = 1.0,
+                   retries: int = 5) -> list[float]:
     body = json.dumps({
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
         "thinking": {"type": "disabled"},
-        "temperature": 0,
+        "temperature": temperature,
         "max_tokens": 1,
         "logprobs": True,
         "top_logprobs": 20,
+        "logit_bias": {str(DEEPSEEK_NUMBER_TOKEN_IDS[label]): 100 for label in labels},
         "stream": False,
     }).encode()
     request = urllib.request.Request(
@@ -253,6 +256,9 @@ def score_deepseek(prompt: str, labels: list[str], model: str,
         try:
             with urllib.request.urlopen(request, timeout=120) as response:
                 return parse_openai_logprobs(json.load(response), labels)
+        except ValueError:
+            if attempt == retries - 1:
+                raise
         except urllib.error.HTTPError as error:
             detail = error.read().decode(errors="replace")
             if error.code not in (429, 500, 502, 503, 504) or attempt == retries - 1:
@@ -297,8 +303,9 @@ def paired_bootstrap(frame: pd.DataFrame, left: str, right: str,
 
 def evaluate(cache_path: Path, metadata: dict, output_path: Path, seed: int) -> dict:
     records = list(load_cache(cache_path).values())
+    valid_records = [record for record in records if record.get("probabilities")]
     table = {(record["caseid"], record["item"], record["condition"]): record
-             for record in records}
+             for record in valid_records}
     caseids = sorted({record["caseid"] for record in records})
     calibration_ids = {caseid for caseid in caseids if stable_bucket(caseid, seed + 991) < 5}
     rows = []
@@ -381,6 +388,8 @@ def evaluate(cache_path: Path, metadata: dict, output_path: Path, seed: int) -> 
         }
     payload = {
         "phase": "personadelta_pretest", "post_freeze": True,
+        "api_records": len(records), "valid_api_records": len(valid_records),
+        "invalid_api_rate": 1.0 - len(valid_records) / max(len(records), 1),
         "respondents_total": len(caseids), "calibration_respondents": len(calibration_ids),
         "evaluation_respondents": len(caseids) - len(calibration_ids),
         "targets": metadata["targets"], "max_history": metadata["max_history"],
@@ -411,6 +420,7 @@ def main() -> None:
     parser.add_argument("--backend", choices=["local", "deepseek"], default="local")
     parser.add_argument("--api-base", default="https://api.deepseek.com")
     parser.add_argument("--api-concurrency", type=int, default=4)
+    parser.add_argument("--api-temperature", type=float, default=1.0)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--max-length", type=int, default=4096)
     parser.add_argument("--cache", default="cross_survey/results/personadelta_pretest_logits.jsonl")
@@ -443,14 +453,19 @@ def main() -> None:
                 with ThreadPoolExecutor(max_workers=args.api_concurrency) as executor:
                     futures = {executor.submit(
                         score_deepseek, row["prompt"], row["labels"], args.model,
-                        args.api_base, api_key): row for row in pending}
+                        args.api_base, api_key, args.api_temperature): row for row in pending}
                     completed = 0
                     for future in as_completed(futures):
                         row = futures[future]
-                        probabilities = future.result()
                         result = {key: value for key, value in row.items() if key != "prompt"}
-                        result.update({"model": args.model, "backend": "deepseek",
-                                       "probabilities": probabilities})
+                        try:
+                            probabilities = future.result()
+                            result.update({"model": args.model, "backend": "deepseek",
+                                           "probabilities": probabilities, "error": None})
+                        except Exception as error:
+                            result.update({"model": args.model, "backend": "deepseek",
+                                           "probabilities": None,
+                                           "error": f"{type(error).__name__}: {error}"})
                         handle.write(json.dumps(result) + "\n")
                         handle.flush()
                         completed += 1

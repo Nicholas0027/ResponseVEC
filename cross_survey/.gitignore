@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 results/**/*_raw.json
 results/**/*.rows.parquet
+results/*_logits.jsonl
