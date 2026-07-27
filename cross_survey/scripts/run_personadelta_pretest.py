@@ -13,7 +13,12 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import os
 import re
+import time
+import urllib.error
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import numpy as np
@@ -212,6 +217,53 @@ def load_cache(path: Path) -> dict[str, dict]:
             (json.loads(line) for line in path.read_text().splitlines() if line.strip())}
 
 
+def parse_openai_logprobs(payload: dict, labels: list[str]) -> list[float]:
+    try:
+        entries = payload["choices"][0]["logprobs"]["content"][0]["top_logprobs"]
+    except (KeyError, IndexError, TypeError) as error:
+        raise ValueError(f"API response lacks top-token logprobs: {error}") from error
+    scores = {}
+    for entry in entries:
+        token = str(entry.get("token", "")).strip()
+        if token in labels:
+            scores[token] = max(scores.get(token, -np.inf), float(entry["logprob"]))
+    missing = [label for label in labels if label not in scores]
+    if missing:
+        raise ValueError(f"top_logprobs omitted option labels: {missing}")
+    logits = np.asarray([scores[label] for label in labels], float)
+    return softmax(logits).tolist()
+
+
+def score_deepseek(prompt: str, labels: list[str], model: str,
+                   api_base: str, api_key: str, retries: int = 5) -> list[float]:
+    body = json.dumps({
+        "model": model,
+        "messages": [{"role": "user", "content": prompt}],
+        "thinking": {"type": "disabled"},
+        "temperature": 0,
+        "max_tokens": 1,
+        "logprobs": True,
+        "top_logprobs": 20,
+        "stream": False,
+    }).encode()
+    request = urllib.request.Request(
+        f"{api_base.rstrip('/')}/chat/completions", data=body, method="POST",
+        headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"})
+    for attempt in range(retries):
+        try:
+            with urllib.request.urlopen(request, timeout=120) as response:
+                return parse_openai_logprobs(json.load(response), labels)
+        except urllib.error.HTTPError as error:
+            detail = error.read().decode(errors="replace")
+            if error.code not in (429, 500, 502, 503, 504) or attempt == retries - 1:
+                raise RuntimeError(f"DeepSeek HTTP {error.code}: {detail}") from error
+        except (urllib.error.URLError, TimeoutError):
+            if attempt == retries - 1:
+                raise
+        time.sleep(2 ** attempt)
+    raise RuntimeError("unreachable DeepSeek retry state")
+
+
 def softmax(values: np.ndarray) -> np.ndarray:
     values = values - np.max(values)
     result = np.exp(values)
@@ -356,6 +408,9 @@ def main() -> None:
     parser.add_argument("--max-history", type=int, default=20)
     parser.add_argument("--seed", type=int, default=1701)
     parser.add_argument("--model", default="Qwen/Qwen3-32B-AWQ")
+    parser.add_argument("--backend", choices=["local", "deepseek"], default="local")
+    parser.add_argument("--api-base", default="https://api.deepseek.com")
+    parser.add_argument("--api-concurrency", type=int, default=4)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--max-length", type=int, default=4096)
     parser.add_argument("--cache", default="cross_survey/results/personadelta_pretest_logits.jsonl")
@@ -379,43 +434,66 @@ def main() -> None:
     pending = [row for row in prompt_rows if row["cache_key"] not in cache]
     print(f"prompts={len(prompt_rows)} cached={len(cache)} pending={len(pending)}")
     if pending:
-        import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
-
-        tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
-        token_ids = {}
-        for label in LABELS:
-            encoded = tokenizer.encode(label, add_special_tokens=False)
-            if len(encoded) != 1:
-                raise ValueError(f"label {label!r} is not one token: {encoded}")
-            token_ids[label] = encoded[0]
-        model = AutoModelForCausalLM.from_pretrained(
-            args.model, device_map="auto", dtype=torch.float16, trust_remote_code=True)
-        model.eval()
-        if tokenizer.pad_token_id is None:
-            tokenizer.pad_token = tokenizer.eos_token
-        tokenizer.padding_side = "left"
         cache_path.parent.mkdir(parents=True, exist_ok=True)
-        with cache_path.open("a", encoding="utf-8") as handle:
-            for start in range(0, len(pending), args.batch_size):
-                batch = pending[start:start + args.batch_size]
-                rendered = [tokenizer.apply_chat_template(
-                    [{"role": "user", "content": row["prompt"]}], tokenize=False,
-                    add_generation_prompt=True, enable_thinking=False) for row in batch]
-                encoded = tokenizer(rendered, return_tensors="pt", padding=True,
-                                    truncation=True, max_length=args.max_length).to(model.device)
-                with torch.inference_mode():
-                    logits = model(**encoded, use_cache=False).logits[:, -1, :].float().cpu()
-                for index, row in enumerate(batch):
-                    ids = [token_ids[label] for label in row["labels"]]
-                    probabilities = torch.softmax(logits[index, ids], dim=0).numpy().tolist()
-                    result = {key: value for key, value in row.items() if key != "prompt"}
-                    result.update({"model": args.model, "probabilities": probabilities})
-                    handle.write(json.dumps(result) + "\n")
-                    handle.flush()
-                print(f"scored {min(start + len(batch), len(pending))}/{len(pending)} pending")
-        del model
-        torch.cuda.empty_cache()
+        if args.backend == "deepseek":
+            api_key = os.environ.get("DEEPSEEK_API_KEY")
+            if not api_key:
+                raise RuntimeError("DEEPSEEK_API_KEY is not set")
+            with cache_path.open("a", encoding="utf-8") as handle:
+                with ThreadPoolExecutor(max_workers=args.api_concurrency) as executor:
+                    futures = {executor.submit(
+                        score_deepseek, row["prompt"], row["labels"], args.model,
+                        args.api_base, api_key): row for row in pending}
+                    completed = 0
+                    for future in as_completed(futures):
+                        row = futures[future]
+                        probabilities = future.result()
+                        result = {key: value for key, value in row.items() if key != "prompt"}
+                        result.update({"model": args.model, "backend": "deepseek",
+                                       "probabilities": probabilities})
+                        handle.write(json.dumps(result) + "\n")
+                        handle.flush()
+                        completed += 1
+                        if completed % 10 == 0 or completed == len(pending):
+                            print(f"scored {completed}/{len(pending)} pending")
+        else:
+            import torch
+            from transformers import AutoModelForCausalLM, AutoTokenizer
+
+            tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
+            token_ids = {}
+            for label in LABELS:
+                encoded = tokenizer.encode(label, add_special_tokens=False)
+                if len(encoded) != 1:
+                    raise ValueError(f"label {label!r} is not one token: {encoded}")
+                token_ids[label] = encoded[0]
+            model = AutoModelForCausalLM.from_pretrained(
+                args.model, device_map="auto", dtype=torch.float16, trust_remote_code=True)
+            model.eval()
+            if tokenizer.pad_token_id is None:
+                tokenizer.pad_token = tokenizer.eos_token
+            tokenizer.padding_side = "left"
+            with cache_path.open("a", encoding="utf-8") as handle:
+                for start in range(0, len(pending), args.batch_size):
+                    batch = pending[start:start + args.batch_size]
+                    rendered = [tokenizer.apply_chat_template(
+                        [{"role": "user", "content": row["prompt"]}], tokenize=False,
+                        add_generation_prompt=True, enable_thinking=False) for row in batch]
+                    encoded = tokenizer(rendered, return_tensors="pt", padding=True,
+                                        truncation=True, max_length=args.max_length).to(model.device)
+                    with torch.inference_mode():
+                        logits = model(**encoded, use_cache=False).logits[:, -1, :].float().cpu()
+                    for index, row in enumerate(batch):
+                        ids = [token_ids[label] for label in row["labels"]]
+                        probabilities = torch.softmax(logits[index, ids], dim=0).numpy().tolist()
+                        result = {key: value for key, value in row.items() if key != "prompt"}
+                        result.update({"model": args.model, "backend": "local",
+                                       "probabilities": probabilities})
+                        handle.write(json.dumps(result) + "\n")
+                        handle.flush()
+                    print(f"scored {min(start + len(batch), len(pending))}/{len(pending)} pending")
+            del model
+            torch.cuda.empty_cache()
     evaluate(cache_path, metadata, Path(args.output), args.seed)
 
 

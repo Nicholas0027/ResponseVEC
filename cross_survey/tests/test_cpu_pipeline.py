@@ -180,3 +180,13 @@ def test_personadelta_option_permutation_is_deterministic():
     b = personadelta.deterministic_permutation("r1", "q1", 5, 1701)
     assert np.array_equal(a, b)
     assert sorted(a.tolist()) == list(range(5))
+
+
+def test_personadelta_parses_openai_top_logprobs():
+    payload = {"choices": [{"logprobs": {"content": [{"top_logprobs": [
+        {"token": " A", "logprob": -0.2},
+        {"token": "B", "logprob": -1.2},
+    ]}]}}]}
+    probabilities = personadelta.parse_openai_logprobs(payload, ["A", "B"])
+    assert np.isclose(sum(probabilities), 1.0)
+    assert probabilities[0] > probabilities[1]
