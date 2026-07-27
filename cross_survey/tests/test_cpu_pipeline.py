@@ -23,6 +23,7 @@ cold_catalog = load_script("build_cold_item_catalog.py")
 cold_loading = load_script("run_cold_item_loading.py")
 structured = load_script("build_structured_item_prompts.py")
 generator = load_script("generate_structured_items.py")
+personadelta = load_script("run_personadelta_pretest.py")
 
 
 def test_family_collapses_grid_subitems():
@@ -156,3 +157,26 @@ def test_json_extractor_rejects_missing_object():
     import pytest
     with pytest.raises(ValueError):
         generator.extract_json("no object here")
+
+
+def test_personadelta_grid_stem_extracts_item_specific_wording():
+    text = ("[CC20_327grid] {grid} Health proposals [CC20_327a] Expand Medicare "
+            "to cover all Americans. ◯ ◯ [CC20_327b] Negotiate drug prices.")
+    assert personadelta.clean_item_stem(text, "CC20_327a") == (
+        "Expand Medicare to cover all Americans."
+    )
+
+
+def test_personadelta_prompt_changes_only_history_block():
+    full = personadelta.render_prompt("Target?", ["A", "B"], ["Yes", "No"],
+                                      ["- Prior? Answer: Yes"])
+    empty = personadelta.render_prompt("Target?", ["A", "B"], ["Yes", "No"], None)
+    assert "Prior? Answer: Yes" in full and "Prior? Answer: Yes" not in empty
+    assert full.split("Target question:", 1)[1] == empty.split("Target question:", 1)[1]
+
+
+def test_personadelta_option_permutation_is_deterministic():
+    a = personadelta.deterministic_permutation("r1", "q1", 5, 1701)
+    b = personadelta.deterministic_permutation("r1", "q1", 5, 1701)
+    assert np.array_equal(a, b)
+    assert sorted(a.tolist()) == list(range(5))
